@@ -5,14 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     // 2D array of Card stacks
+    // TODO: Should this be an ArrayList?
     private int[][] field = new int[5][5];
 
-    // The buttons that represent that
-    Button[][] fieldBtns = new Button[5][5];
+    // The buttons that represent the stacks of cards on the table
+    private Button[][] fieldBtns = new Button[5][5];
 
+    // The deck of cards
+    private ArrayList deck = new ArrayList(54);
+
+    // The stacks of cards
+    private ArrayList royalStack = new ArrayList(12);
+    private ArrayList shameStack = new ArrayList(33);
+
+    private Button shameBtn;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,12 +32,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-    field[5][5] //2D array of Card stacks
-    fieldBtns[5][5]
-    deck[54] //ArrayList
-    royalStack[12]
-    shameStack[33] //54-(5*5-4) = 54-21 = 33
-    shameBtn
 
     cards{
         boolean royal
