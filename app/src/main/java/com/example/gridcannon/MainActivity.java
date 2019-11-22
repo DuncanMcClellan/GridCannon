@@ -32,12 +32,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
+//Pseudocode written and designed by Duncan McClellan
+//Pseudocode for Gridcannon Android App
+
+field[5][5] //2D array of Card stacks
+fieldBtns[5][5]
+deck[54] //ArrayList
+royalStack[12]
+shameStack[33] //54-(5*5-4) = 54-21 = 33
+shameBtn
+playing
+status
+
 cards{
 	boolean royal
 	boolean wild
 	boolean red
 	boolean dead = false
 	int value
+	int armor = 0
 	char suit
 }
 
@@ -47,51 +60,93 @@ onCreate{
 	shameBtn = button in view
 	
 	setOnClick
-	init
-	deal
+	newGame
+}
+
+resetStack(int x, int y){
+	while(field[x][y].size > 0)
+		deck.add(field[x][y].pop())
 }
 
 placeCard(int x, int y){
 	if(x == 9 && y == 9)//artifical shamepile pos
 		shameStack.push(deck[0])
+		update shamepile button img
+		reset = true
 	else if(deck[0].wild)
-		while(field[x][y].size > 0)
-			deck.add(field[x][y].pop())
+		resetStack(x, y)
 		field[x][y].push(deck[0])
+		update button img
+		trigger(x, y)
 	else if(field[x][y].peek().value < deck[0].value)
 		field[x][y].push(deck[0])
+		update button img
+		trigger(x, y)
+	else
+		//nothing. Invalid selection
 
-	trigger(x, y)
-
-	if(deck[0].royal)
+	if(!reset)
 		while(deck[0].royal)
 			royalStack.push(deck[0])
 			placeRoyals
 
-	if(isGameOver)
+		checkGameOver		
 }
- //I'm still working on this
+
 trigger(int x, int y){
 	dmg[2] = dmg(x, y)
 	
 	if(dmg[0] > 0)
 		if(x == 1)
 			if(field[x+3][y].peek() != null && field[x+3][y].peek().value == 13) //King
-				if(field[x+3][y].peek().value <= dmg[0] && field[x+3][y].peek().suit == field[x+1][y].peek().suit &&)
-			if(field[x+3][y].peek() != null && field[x+3][y].peek().value == 12) //Queen
-			if(field[x+3][y].peek() != null && field[x+3][y].peek().value <= dmg[0])
+				if(field[x+3][y].peek().value <= dmg[0] && field[x+3][y].peek().suit == field[x+2][y].peek().suit && field[x+3][y].peek().suit == field[x+1][y].peek().suit && field[x+3][y].peek().suit == field[x][y].peek().suit)
+					field[x+3][y].peek().dead = true
+			else if(field[x+3][y].peek() != null && field[x+3][y].peek().value == 12) //Queen
+				if(field[x+3][y].peek().value <= dmg[0] && field[x+3][y].peek().red == field[x+2][y].peek().red && field[x+3][y].peek().red == field[x+1][y].peek().red && field[x+3][y].peek().red == field[x][y].peek().red)
+					field[x+3][y].peek().dead = true
+			else if(field[x+3][y].peek() != null && field[x+3][y].peek().value <= dmg[0])
 				field[x+3][y].peek().dead = true
-		if(x == 3)
-			if(field[x-3][y].peek() != null && field[x-3][y].peek().value <= dmg[0])
+			else
+				//nothing. royal slot is null
+		else if(x == 3)
+			if(field[x-3][y].peek() != null && field[x-3][y].peek().value == 13) //King
+				if(field[x-3][y].peek().value <= dmg[0] && field[x-3][y].peek().suit == field[x-2][y].peek().suit && field[x-3][y].peek().suit == field[x-1][y].peek().suit && field[x-3][y].peek().suit == field[x][y].peek().suit)
+					field[x-3][y].peek().dead = true
+			else if(field[x-3][y].peek() != null && field[x+3][y].peek().value == 12) //Queen
+				if(field[x-3][y].peek().value <= dmg[0] && field[x-3][y].peek().red == field[x-2][y].peek().red && field[x-3][y].peek().red == field[x-1][y].peek().red && field[x-3][y].peek().red == field[x][y].peek().red)
+					field[x-3][y].peek().dead = true
+			else if(field[x-3][y].peek() != null && field[x-3][y].peek().value <= dmg[0])
 				field[x-3][y].peek().dead = true
+			else
+				//nothing. royal slot is null
+		else
+			//nothing
 
 	if(dmg[1] > 0)
 		if(y == 1)
-			if(field[x][y+3].peek() != null && field[x][y+3].peek().value <= dmg[1])
+			if(field[x][y+3].peek() != null && field[x][y+3].peek().value == 13) //King
+				if(field[x][y+3].peek().value <= dmg[0] && field[x][y+3].peek().suit == field[x][y+2].peek().suit && field[x][y+3].peek().suit == field[x][y+1].peek().suit && field[x][y+3].peek().suit == field[x][y].peek().suit)
+					field[x][y+3].peek().dead = true
+			else if(field[x][y+3].peek() != null && field[x+3][y].peek().value == 12) //Queen
+				if(field[x][y+3].peek().value <= dmg[0] && field[x][y+3].peek().red == field[x][y+2].peek().red && field[x][y+3].peek().red == field[x][y+1].peek().red && field[x][y+3].peek().red == field[x][y].peek().red)
+					field[x][y+3].peek().dead = true
+			else if(field[x][y+3].peek() != null && field[x][y+3].peek().value <= dmg[0])
 				field[x][y+3].peek().dead = true
-		if(y == 3)
-			if(field[x][y-3].peek() != null && field[x][y-3].peek().value <= dmg[1])
+			else
+				//nothing. royal slot is null
+		else if(y == 3)
+			if(field[x][y-3].peek() != null && field[x][y-3].peek().value == 13) //King
+				if(field[x][y-3].peek().value <= dmg[0] && field[x][y-3].peek().suit == field[x][y-2].peek().suit && field[x][y-3].peek().suit == field[x][y-1].peek().suit && field[x][y-3].peek().suit == field[x][y].peek().suit)
+					field[x][y-3].peek().dead = true
+			else if(field[x][y-3].peek() != null && field[x-3][y].peek().value == 12) //Queen
+				if(field[x][y-3].peek().value <= dmg[0] && field[x][y-3].peek().red == field[x][y-2].peek().red && field[x][y-3].peek().red == field[x][y-1].peek().red && field[x][y-3].peek().red == field[x][y].peek().red)
+					field[x][y-3].peek().dead = true
+			else if(field[x][y-3].peek() != null && field[x][y-3].peek().value <= dmg[0])
 				field[x][y-3].peek().dead = true
+			else
+				//nothing. royal slot is null
+		else
+			//nothing
 }
 
 int[] dmg(int x, int y){
@@ -125,11 +180,17 @@ int[] dmg(int x, int y){
 	return dmg[]
 }
 
-boolean isGameOver{
-	counter = 0
+lockGame(boolean win){
+	playing = false
+	
+	if(win)
+		status.setText("Win")
+	else
+		status.setText("Loss")
+}
 
-	if(deck.size == 0)
-		return true
+checkGameOver{
+	counter = 0
 	
 	for(i = 0 < 5)
 		for(j = 0 < 5)
@@ -137,9 +198,10 @@ boolean isGameOver{
 				counter++
 				
 	if(counter == 12)
-		return true
+		lockGame(true)
 		
-	return false
+	if(deck.size == 0)
+		lockGame(false)
 }
 
 shuffle{
@@ -226,10 +288,29 @@ placeRoyals{
 }
 
 setOnClick{
-	fieldBtns[i].setOnClickListener((v) -> {
-		if()
-			placeCard
+	//can't for loop this because of lamda function scopes
+	fieldBtns[i][j].setOnClickListener((v) -> {
+		if(playing && )
+			placeCard(i, j)
+		if(reset)
+			resetStack(i, j)
+			while(deck[0].royal)
+				royalStack.push(deck[0])
+				placeRoyals
+			
 	})
+	
+	shameBtn.setOnClickListener((v) -> {
+		if(playing && )
+			placeCard(9, 9)
+	})
+}
+
+newGame{
+	init
+	deal
+	status.setText("Playing")
+	playing = true
 }
 
 init{
@@ -273,8 +354,6 @@ init{
 
 	shuffle
 }
-
-
     */
 
 
