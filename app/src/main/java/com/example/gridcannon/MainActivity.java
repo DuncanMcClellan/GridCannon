@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-
 cards{
 	boolean royal
 	boolean wild
@@ -61,29 +60,86 @@ placeCard(int x, int y){
 		field[x][y].push(deck[0])
 	else if(field[x][y].peek().value < deck[0].value)
 		field[x][y].push(deck[0])
-	else
-		
-		
+
+	trigger(x, y)
+
 	if(deck[0].royal)
 		while(deck[0].royal)
 			royalStack.push(deck[0])
 			placeRoyals
+
+	if(isGameOver)
+}
+ //I'm still working on this
+trigger(int x, int y){
+	dmg[2] = dmg(x, y)
+	
+	if(dmg[0] > 0)
+		if(x == 1)
+			if(field[x+3][y].peek() != null && field[x+3][y].peek().value == 13) //King
+				if(field[x+3][y].peek().value <= dmg[0] && field[x+3][y].peek().suit == field[x+1][y].peek().suit &&)
+			if(field[x+3][y].peek() != null && field[x+3][y].peek().value == 12) //Queen
+			if(field[x+3][y].peek() != null && field[x+3][y].peek().value <= dmg[0])
+				field[x+3][y].peek().dead = true
+		if(x == 3)
+			if(field[x-3][y].peek() != null && field[x-3][y].peek().value <= dmg[0])
+				field[x-3][y].peek().dead = true
+
+	if(dmg[1] > 0)
+		if(y == 1)
+			if(field[x][y+3].peek() != null && field[x][y+3].peek().value <= dmg[1])
+				field[x][y+3].peek().dead = true
+		if(y == 3)
+			if(field[x][y-3].peek() != null && field[x][y-3].peek().value <= dmg[1])
+				field[x][y-3].peek().dead = true
 }
 
-int[] trigger(int x, int y){
-	int dmg[2]
+int[] dmg(int x, int y){
+	int dmg[2] //opposing x, opposing y
 	
 	if(x == 1 && y == 1)
-		dmg[0] = field[x][y+1].peek().value + field[x][y+2].peek().value
-		dmg[1] = field[x+1][y].peek().value + field[x+2][y].peek().value
+		dmg[0] = field[x+1][y].peek().value + field[x+2][y].peek().value //right
+		dmg[1] = field[x][y+1].peek().value + field[x][y+2].peek().value //down
+	else if(x == 1 && y == 3)
+		dmg[0] = field[x+1][y].peek().value + field[x+2][y].peek().value //right
+		dmg[1] = field[x][y-1].peek().value + field[x][y-2].peek().value //up
 	else if(x == 1)
-		dmg[0] = field[x][y+1].peek().value + field[x][y+2].peek().value
+		dmg[0] = field[x+1][y].peek().value + field[x+2][y].peek().value //right
 		dmg[1] = 0
-	else if(y == 1)
+	else if(x == 2 && y == 1)
 		dmg[0] = 0
-		dmg[1] = field[x+1][y].peek().value + field[x+2][y].peek().value
+		dmg[1] = field[x][y+1].peek().value + field[x][y+2].peek().value //down
+	else if(x == 2 && y == 3)
+		dmg[0] = 0
+		dmg[1] = field[x][y-1].peek().value + field[x][y-2].peek().value //up
+	else if(x == 3 && y == 1)
+		dmg[0] = field[x=1][y].peek().value + field[x-2][y].peek().value //left
+		dmg[1] = field[x][y+1].peek().value + field[x][y+2].peek().value //down
+	else if(x == 3 && y == 3)
+		dmg[0] = field[x-1][y].peek().value + field[x-2][y].peek().value //left
+		dmg[1] = field[x][y-1].peek().value + field[x][y-2].peek().value //up
+	else if(x == 3)
+		dmg[0] = field[x-1][y].peek().value + field[x-2][y].peek().value //left
+		dmg[1] = 0
 	
 	return dmg[]
+}
+
+boolean isGameOver{
+	counter = 0
+
+	if(deck.size == 0)
+		return true
+	
+	for(i = 0 < 5)
+		for(j = 0 < 5)
+			if(field[i][j].peek() != null && field[i][j].peek().dead)
+				counter++
+				
+	if(counter == 12)
+		return true
+		
+	return false
 }
 
 shuffle{
@@ -216,8 +272,8 @@ init{
 			error
 
 	shuffle
-    }
 }
+
 
     */
 
