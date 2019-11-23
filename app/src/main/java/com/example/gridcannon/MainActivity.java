@@ -9,16 +9,18 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Represents the stacks of cards on the field.
     CardStack[][] field;
 
     // The buttons that represent the stacks of cards on the table
     private Button[][] fieldBtns;
     private Button shameBtn;
+    private Button newGameBtn;
 
     // The deck of cards
     private ArrayList deck = new ArrayList<Card>(54);
 
-    // The stacks of cards
+    // Royal & Shame stacks of cards
     private CardStack royalDeck;
     private CardStack shameDeck;
 
@@ -34,16 +36,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //pops the stack at the selected pos onto the bottom of the deck until the stack is empty
-    /*
     void resetStack(int x, int y) {
-        cardStack temp;
-        while(field[x][y].size > 0)
+
+        CardStack temp = new CardStack();
+        while (field[x][y].size > 0) {
             temp.push(field[x][y].pop());
-        while(temp.size > 0)
+        }
+
+        while (temp.size > 0) {
             deck.add(temp.pop());
+        }
     }
-    */
-    
+
     public void init() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
