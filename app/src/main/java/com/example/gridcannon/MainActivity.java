@@ -44,8 +44,7 @@ Button shameBtn
 boolean playing
 TextView status
 
-//Cards class
-Cards{
+class Cards{
 	boolean royal
 	boolean wild
 	boolean red
@@ -59,18 +58,21 @@ onCreate{
 	fieldBtns = new Button[5][5]
 	fieldBtns[i] = button in view
 	
-	setOnClick
-	newGame
+	setOnClick()
+	newGame()
 }
 
 //pops the stack at the selected pos onto the bottom of the deck until the stack is empty
-resetStack(int x, int y){
+void resetStack(int x, int y){
+	cardStack temp
 	while(field[x][y].size > 0)
-		deck.add(field[x][y].pop())
+		temp.push(field[x][y].pop())
+	while(temp.size > 0)
+		deck.add(temp.pop())
 }
 
 //places card at selected position if all rules are met
-placeCard(int x, int y){
+void placeCard(int x, int y){
 	if(x == 9 && y == 9)//artifical shamepile pos
 		shameStack.push(deck[0])
 		update shamepile button img
@@ -78,10 +80,12 @@ placeCard(int x, int y){
 	else if(deck[0].wild)
 		resetStack(x, y)
 		field[x][y].push(deck[0])
+		deck.remove(0)
 		update button img
 		trigger(x, y)
 	else if(field[x][y].peek().value <= deck[0].value)
 		field[x][y].push(deck[0])
+		deck.remove(0)
 		update button img
 		trigger(x, y)
 	else
@@ -90,13 +94,14 @@ placeCard(int x, int y){
 	if(!reset)
 		while(deck[0].royal)
 			royalStack.push(deck[0])
-			placeRoyals
+			deck.remove(0)
+			placeRoyals()
 
-		checkGameOver		
+		checkGameOver()	
 }
 
 //checks to see if a royal is to die and kills the royal
-trigger(int x, int y){
+void trigger(int x, int y){
 	dmg[2] = dmg(x, y)
 	
 	if(dmg[0] > 0)
@@ -184,8 +189,15 @@ int[] dmg(int x, int y){
 	return dmg[]
 }
 
+//adds armor to Royals which makes them harder to kill
+//don't implement this yet. more logic needs to be created
+void addArmor(int x, int y){
+	field[x][y].peek().armor += deck[0].value
+	deck.remove(0)
+}
+
 //Ends the game and displays if the player won or lose
-lockGame(boolean win){
+void lockGame(boolean win){
 	playing = false
 	
 	if(win)
@@ -195,7 +207,7 @@ lockGame(boolean win){
 }
 
 //checks game over conditions to see if the game should end or continue. If game ends, calls lockGame
-checkGameOver{
+void checkGameOver(){
 	counter = 0
 	
 	for(i = 0 < 5)
@@ -211,27 +223,36 @@ checkGameOver{
 }
 
 //shuffles the deck at beginning of the game
-shuffle{
-	shuffle deck
+void shuffle(){
+	Cards temp[54] //ArrayList
+	for(i = 0 < 54)
+		rand = random int
+		temp[i] = deck[rand]
+		
+	for(i = 0 < 54)
+		rand = random int
+		deck[i] = temp[rand]
 }
 
 //deals cards to the grid, skipping the center of the grid
-deal{
+void deal(){
 	for(i = 1 < 4)
 		for(j = 1 < 4)
 			if(!(i == 2 && j == 2))
 				while(true)
-					if(deck.top != royal)
-						field[i][j].push(deck.pop())
+					if(deck[0] != royal)
+						field[i][j].push(deck[0])
+						deck.remove(0)
 						break
 					else
-						royalStack.push(deck.pop())
+						royalStack.push(deck[0])
+						deck.remove[0]
 	
-	placeRoyals
+	placeRoyals()
 }
 
 //places all royals on the royalStack
-placeRoyals{
+void placeRoyals(){
 	while(royalStack.peek() != null)
 		int x = 0, y = 0;
 		
@@ -273,64 +294,96 @@ placeRoyals{
 								x = i
 								y = j
 	
-		if(x == 1)
-			if(y == 1)
-				user selection
-			if(y == 2)
-				x--;
-			if(y == 3)
-				user selection
-		else if(x == 2)
-			if(y == 1)
-				y--;
-			if(y == 3)
-				y++;
-		else if(x == 3)
-			if(y == 1)
-				user selection
-			if(y == 2)
-				x++;
-			if(y == 3)
-				user selection		
-		else
-			error
-	
-		field[x][y].push(royalStack.push())
+		selectRoyal(x, y)
 }
 
-setOnClick{
+//selects the grid position the royal is to be placed at and places it
+selectRoyal(int x, int y){
+	if(x == 1)
+		if(y == 1)
+			if(field[x-1][y].peek() != null)
+				y--
+			else if(field[x][y-1].peek() != null)
+				x--
+			else //both are null
+				x-- //user selection later
+		if(y == 2)
+			x--;
+		if(y == 3)
+			if(field[x-1][y].peek() != null)
+				y++
+			else if(field[x][y+1].peek() != null)
+				x--
+			else //both are null
+				y++ //user selection later
+	else if(x == 2)
+		if(y == 1)
+			y--;
+		if(y == 3)
+			y++;
+	else if(x == 3)
+		if(y == 1)
+			if(field[x+1][y].peek() != null)
+				y--
+			else if(field[x][y-1].peek() != null)
+				x++
+			else //both are null
+				y-- //user selection later
+		if(y == 2)
+			x++;
+		if(y == 3)
+			if(field[x+1][y].peek() != null)
+				y++
+			else if(field[x][y+1].peek() != null)
+				x++
+			else //both are null
+				x++ //user selection later
+	else
+		//error
+	
+	field[x][y].push(royalStack.pop())
+}
+
+void setOnClick(){
 	//can't for loop this because of lamda function scopes
+	//skip corners
 	fieldBtns[i][j].setOnClickListener((v) -> {
-		if(playing && )
+		if(playing)
 			placeCard(i, j)
 		if(reset)
 			resetStack(i, j)
 			while(deck[0].royal)
 				royalStack.push(deck[0])
-				placeRoyals
+				placeRoyals()
+	})
+	
+	//royals
+	fieldBtns[i][j].setOnClickListener((v) -> {
+		if(playing && royalStack.peek() == null)
+			addArmor(i, j)
 	})
 	
 	shameBtn.setOnClickListener((v) -> {
-		if(playing && )
+		if(playing)
 			placeCard(9, 9)
 	})
 	
 	newGameBtn.setOnClickListener((v)) -> {
-		newGame
+		newGame()
 	})
 }
 
 //initializes all variables that have a different value between game start and end
-newGame{
-	init
-	deal
+void newGame(){
+	init()
+	deal()
 	status.setText("Playing")
 	playing = true
 	shameBtn = button in view
 }
 
 //initializes the deck and the field
-init{
+void init(){
 	for(i = 0 < 5)
 		for(j = 0 < 5)
 			if((i == 0 && j == 0) || (i == 0 && j == 4) || (i == 4 && j == 0) || (i == 4 && j == 4))
@@ -368,11 +421,11 @@ init{
 		else if(i < 54)//+3
 			deck[i] = cards(true, false, false, i-41, 'D')
 		else
-			error
+			//error
 
-	shuffle
+	shuffle()
 }
-    */
+	*/
 
 
 }
