@@ -19,10 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList deck = new ArrayList<Card>(54);
 
     // The stacks of cards
-    private ArrayList royalStack = new ArrayList(12);
-    private ArrayList shameStack = new ArrayList(33);
+    private CardStack royalDeck;
+    private CardStack shameDeck;
 
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +33,17 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+    //pops the stack at the selected pos onto the bottom of the deck until the stack is empty
+    /*
+    void resetStack(int x, int y) {
+        cardStack temp;
+        while(field[x][y].size > 0)
+            temp.push(field[x][y].pop());
+        while(temp.size > 0)
+            deck.add(temp.pop());
+    }
+    */
+    
     public void init() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -46,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
+    //dont do setonclick or newgame
+
+        // work on reset stack && place card
 
         for(int i = 0; i < 54; i++) {
 
