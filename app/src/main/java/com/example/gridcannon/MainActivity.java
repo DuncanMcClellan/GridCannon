@@ -43,7 +43,31 @@ public class MainActivity extends AppCompatActivity {
         newGame();
     }
 
-    void shuffle(){
+    private void lockGame(boolean win){
+        playing = false;
+
+        if(win)
+            status.setText("Win");
+        else
+            status.setText("Loss");
+    }
+
+    private void checkGameOver(){
+        int counter = 0;
+
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 5; j++)
+                if (field[i][j].peek() != null && field[i][j].peek().isDead())
+                    counter++;
+
+        if(counter == 12)
+            lockGame(true);
+
+        if(deck.size() == 0)
+            lockGame(false);
+    }
+
+    private void shuffle(){
         ArrayList<Card> temp = new ArrayList<Card>(54);
         Random random = new Random();
 
@@ -60,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void deal(){
+    private void deal(){
         for(int i = 0; i < 4; i++)
             for(int j = 0; j < 4; j++)
                 if(!(i == 2 && j == 2)){
@@ -75,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         placeRoyals();
     }
 
-    void placeRoyals(){
+    private void placeRoyals(){
         while(royalStack.peek() != null){
             int x = 0, y = 0;
 
@@ -123,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void selectRoyal(int x, int y){
+    private void selectRoyal(int x, int y){
         if(x == 1)
             if(y == 1)
                 if(field[x-1][y].peek() != null)
@@ -169,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         field[x][y].push(royalStack.pop());
     }
 
-    void setOnClick(){
+    private void setOnClick(){
         fieldBtns[1][1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -321,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void newGame(){
+    private void newGame(){
         init();
         deal();
         status.setText("Playing");
@@ -332,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
         //shameBtn
     }
 
-    public void init() {
+    private void init() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
 
