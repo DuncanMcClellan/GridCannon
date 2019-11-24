@@ -1,3 +1,5 @@
+package com.example.gridcannon;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         newGame();
     }
 
-     //pops the stack at the selected pos onto the bottom of the deck until the stack is empty
+    //pops the stack at the selected pos onto the bottom of the deck until the stack is empty
     private void resetStack(int x, int y) {
 
         CardStack temp = new CardStack();
