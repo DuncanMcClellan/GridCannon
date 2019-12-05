@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         fieldBtns = new ImageButton[5][5];
 
         // todo Duncan please review this to make sure im not messing it up
+        field = new CardStack[5][5];
 
         // Place-able Field Buttons
         fieldBtns[1][1] = findViewById(R.id.field0);
@@ -217,31 +218,27 @@ public class MainActivity extends AppCompatActivity {
             else {
                 //nothing
             }
-
         }
-
     }
 
     //places card at selected position if all rules are met
     private void placeCard(int x, int y) {
         if (x == 9 && y == 9) {
             shameStack.push(deck.get(0));
-
             reset = true;
+            shameBtn.setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
         }
         else if (deck.get(0).isWild()) {
             resetStack(x, y);
             field[x][y].push(deck.get(0));
-
-            // TODO: Update Button Image
-            //fieldBtns[x][y].setImageResource(deck.get(0).id);
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
 
             trigger(x, y);
         }
         else if (field[x][y].peek().getValue() <= deck.get(0).getValue()) {
             field[x][y].push(deck.get(0));
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
             deck.remove(0);
-            // TODO: Update Button Image
             trigger(x, y);
         }
         else {
@@ -257,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
 
             checkGameOver();
         }
-
     }
 
     private int[] dmg(int x, int y) {
@@ -336,13 +332,13 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < 54; i++) {
             int rand = random.nextInt(54 - i);
-            temp.set(i, deck.get(rand));
+            temp.add(deck.get(rand));
             deck.remove(rand);
         }
 
         for(int i = 0; i < 54; i++) {
             int rand = random.nextInt(54 - i);
-            deck.set(i, temp.get(rand));
+            deck.add(temp.get(rand));
             temp.remove(rand);
         }
     }
@@ -407,6 +403,8 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
             selectRoyal(x, y);
+
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
         }
     }
 
@@ -467,6 +465,7 @@ public class MainActivity extends AppCompatActivity {
                     while(deck.get(0).isRoyal()){
                         royalStack.push(deck.get(0));
                         placeRoyals();
+
                     }
                 }
             }
@@ -616,6 +615,11 @@ public class MainActivity extends AppCompatActivity {
         reset = false;
         royalStack = new CardStack(12);
         shameStack = new CardStack(33);
+
+        for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 5; j++)
+                if(!(i == 0 && (j == 0 || j == 5)) && !(i == 5 && (j == 0 || j == 5)))
+                    field[i][j] = new CardStack();
         //shameBtn
     }
 
@@ -647,7 +651,7 @@ public class MainActivity extends AppCompatActivity {
             else if (i < 12)//+10
                 deck.add(new Card(false, false, false, i - 1, 'S'));
 
-            // Spades Royals
+                // Spades Royals
             else if (i < 15)//+3
                 deck.add(new Card(true, false, false, i - 1, 'S'));
 
@@ -686,7 +690,7 @@ public class MainActivity extends AppCompatActivity {
                 // Diamonds Royals
             else if (i < 54)//+3
                 deck.add(new Card(true, false, false, i - 41, 'D'));
-
+        }
             // Initializing card images
 
 
@@ -959,12 +963,10 @@ public class MainActivity extends AppCompatActivity {
              */
 
             // Throw exception?
-        }
+
 
         shuffle();
     }
-
-
 }
 
 

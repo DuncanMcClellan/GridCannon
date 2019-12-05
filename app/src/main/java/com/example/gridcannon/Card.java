@@ -23,7 +23,7 @@ public class Card {
         this.suit = suit;
     }
 
-    public String getImageName() {
+    public String getImage() {
         return this.imageName;
     }
 
