@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     CardStack[][] field;
 
     // The buttons that represent the stacks of cards on the table
-    private Button[][] fieldBtns;
+    private ImageButton[][] fieldBtns;
     private Button shameBtn;
     private Button newGameBtn;
 
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     // The stacks of cards
     private CardStack royalStack;
     private CardStack shameStack;
+
+
 
     TextView status;
 
@@ -36,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fieldBtns = new Button[5][5];
+        //create playing field buttons in a 5x5 table
+        fieldBtns = new ImageButton[5][5];
 
         // Initialize Field and Deck
         setOnClick();
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private void resetStack(int x, int y) {
 
         CardStack temp = new CardStack();
+
         while (field[x][y].size > 0) {
             temp.push(field[x][y].pop());
         }
@@ -184,18 +189,31 @@ public class MainActivity extends AppCompatActivity {
         if (x == 9 && y == 9) {
             shameStack.push(deck.get(0));
             // TODO: Update Shamepile Button Image
+            String btnID = "btn_" + x + y;
+            int resID = getResources().getIdentifier(btnID, "id", getPackageName());
+            fieldBtns[x][y]=findViewById(resID);
+            fieldBtns[x][y].setOnClickListener((View.OnClickListener) this);
+
             reset = true;
         }
         else if (deck.get(0).isWild()) {
             resetStack(x, y);
             field[x][y].push(deck.get(0));
             // TODO: Update Button Image
+            String btnID = "btn_" + x + y;
+            int resID = getResources().getIdentifier(btnID, "id", getPackageName());
+            fieldBtns[x][y]=findViewById(resID);
+            fieldBtns[x][y].setOnClickListener((View.OnClickListener) this);
             trigger(x, y);
         }
         else if (field[x][y].peek().getValue() <= deck.get(0).getValue()) {
             field[x][y].push(deck.get(0));
             deck.remove(0);
             // TODO: Update Button Image
+            String btnID = "btn_" + x + y;
+            int resID = getResources().getIdentifier(btnID, "id", getPackageName());
+            fieldBtns[x][y]=findViewById(resID);
+            fieldBtns[x][y].setOnClickListener((View.OnClickListener) this);
             trigger(x, y);
         }
         else {
@@ -301,6 +319,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    //add statement to
     private void deal(){
         for(int i = 0; i < 4; i++)
             for(int j = 0; j < 4; j++)
@@ -563,6 +583,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void newGame(){
+        //set all buttons to have back of cards on new game
+        //fill in as deals
         init();
         deal();
         status.setText("Playing");

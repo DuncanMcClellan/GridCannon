@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:columnCount="5"
+    android:background="#278a41"
 >
 
     <Button
@@ -14,7 +15,8 @@
 
 
         android:layout_columnWeight="1"
-        android:text="Empty" />
+        android:text="Empty"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btn01"
@@ -56,7 +58,8 @@
 
         android:layout_columnWeight="1"
 
-        android:text="Empty" />
+        android:text="Empty"
+        android:visibility="invisible" />
 
 
     <Button
@@ -123,12 +126,12 @@
 
     <Button
         android:id="@+id/btn21"
-        android:layout_columnWeight="1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
 
-        android:text="01" />
+        android:text="11" />
 
     <Button
         android:id="@+id/btn22"
@@ -146,11 +149,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        android:layout_columnWeight="1"
-
         android:layout_rowWeight="1"
 
-        android:text="03" />
+        android:layout_columnWeight="1"
+
+        android:text="13" />
 
     <Button
         android:id="@+id/btn24"
@@ -176,33 +179,34 @@
 
     <Button
         android:id="@+id/btn31"
-        android:layout_columnWeight="1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
 
-        android:text="01" />
+        android:text="21" />
+
     <Button
         android:id="@+id/btn32"
 
+        android:layout_width="0dp"
+
+        android:layout_height="0dp"
+        android:layout_rowWeight="1"
         android:layout_columnWeight="1"
 
-        android:layout_rowWeight="1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:text="02" />
+        android:text="22" />
 
     <Button
         android:id="@+id/btn33"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        android:layout_columnWeight="1"
-
         android:layout_rowWeight="1"
 
-        android:text="03" />
+        android:layout_columnWeight="1"
+
+        android:text="23" />
 
     <Button
         android:id="@+id/btn34"
@@ -216,16 +220,6 @@
         android:text="Royal" />
 
 
-
-
-
-
-
-
-
-
-
-
     <Button
         android:id="@+id/btn40"
         android:layout_width="0dp"
@@ -234,7 +228,8 @@
 
 
         android:layout_columnWeight="1"
-        android:text="empty"/>
+        android:text="empty"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btn41"
@@ -272,18 +267,19 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        android:layout_columnWeight="1"
-
         android:layout_rowWeight="1"
 
-        android:text="empty" />
+        android:layout_columnWeight="1"
+
+        android:text="empty"
+        android:visibility="invisible" />
 
 
 
 
 
     <Button
-        android:id="@+id/btn54"
+        android:id="@+id/btn50"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
@@ -292,6 +288,53 @@
         android:layout_rowWeight="1"
 
         android:text="new game" />
+
+    <Button
+        android:id="@+id/btn51"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_rowWeight="1"
+
+        android:layout_columnWeight="1"
+
+        android:text="empty"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn52"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_rowWeight="1"
+
+        android:layout_columnWeight="1"
+
+        android:text="empty"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnShame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_columnWeight="1"
+
+        android:layout_rowWeight="1"
+
+        android:text="Shame" />
+
+    <ImageButton
+        android:id="@+id/btnDeck"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_columnWeight="1"
+
+        android:layout_rowWeight="1"
+
+        android:text="Deck" />
+
 
 
 
