@@ -1,298 +1,301 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/GridLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="5"
->
+    tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn00"
+
+    <GridLayout
+        android:id="@+id/board"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_rowWeight="1"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/royal0"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="0"
+
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+        <Button
+            android:id="@+id/royal1"
+            style="@style/Card"
+
+            android:layout_width="0dp"
+
+            android:layout_height="0dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+        <Button
+            android:id="@+id/royal2"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_row="0"
+
+            android:layout_rowWeight="1"
+
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:text="Royal" />
 
 
-        android:layout_columnWeight="1"
-        android:text="Empty" />
+        <Button
+            android:id="@+id/royal3"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="1"
+
+
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+        <Button
+            android:id="@+id/field0"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+
+            android:layout_columnWeight="1"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/field1"
+            style="@style/Card"
+            android:layout_width="0dp"
+
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+
+            android:layout_columnWeight="1"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/field2"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+
+            android:layout_column="3"
+
+            android:layout_columnWeight="1"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/royal4"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="1"
+
+            android:layout_rowWeight="1"
+
+            android:layout_column="4"
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+
+        <Button
+            android:id="@+id/royal5"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="2"
+
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+        <Button
+            android:id="@+id/field3"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/field4"
+
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+
+            android:layout_columnWeight="1"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/field5"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+
+            android:layout_column="3"
+
+            android:layout_columnWeight="1"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/royal6"
+            style="@style/Card"
+            android:layout_width="0dp"
+
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_column="4"
+
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+
+        <Button
+            android:id="@+id/royal7"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_row="3"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+        <Button
+            android:id="@+id/field6"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="3"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/field7"
+
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+
+            android:layout_columnWeight="1"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/field8"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="3"
+
+            android:layout_rowWeight="1"
+
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/royal8"
+            style="@style/Card"
+            android:layout_width="0dp"
+
+            android:layout_height="0dp"
+            android:layout_row="3"
+            android:layout_rowWeight="1"
+
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+
+        <Button
+            android:id="@+id/royal9"
+            style="@style/Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:scrollHorizontally="true"
+            android:text="Royal" />
+
+        <Button
+            android:id="@+id/royal10"
+
+            style="@style/Card"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+        <Button
+            android:id="@+id/royal11"
+            style="@style/Card"
+            android:layout_width="0dp"
+
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+
+            android:layout_columnWeight="1"
+            android:text="Royal" />
+
+    </GridLayout>
 
     <Button
-        android:id="@+id/btn01"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn02"
-
-        android:layout_width="0dp"
-
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn03"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_rowWeight="1"
-
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn04"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_rowWeight="1"
-
-        android:layout_columnWeight="1"
-
-        android:text="Empty" />
-
-
-    <Button
-        android:id="@+id/btn10"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-
-
-        android:layout_columnWeight="1"
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn11"
-        android:layout_columnWeight="1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-
-        android:text="01" />
-    <Button
-        android:id="@+id/btn12"
-
-        android:layout_columnWeight="1"
-
-        android:layout_rowWeight="1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:text="02" />
-
-    <Button
-        android:id="@+id/btn13"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_columnWeight="1"
-
-        android:layout_rowWeight="1"
-
-        android:text="03" />
-
-    <Button
-        android:id="@+id/btn14"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_rowWeight="1"
-
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-
-    <Button
-        android:id="@+id/btn20"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-
-
-        android:layout_columnWeight="1"
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn21"
-        android:layout_columnWeight="1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-
-        android:text="01" />
-
-    <Button
-        android:id="@+id/btn22"
-
-        android:layout_width="0dp"
-
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-
-        android:text="middle" />
-
-    <Button
-        android:id="@+id/btn23"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_columnWeight="1"
-
-        android:layout_rowWeight="1"
-
-        android:text="03" />
-
-    <Button
-        android:id="@+id/btn24"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_rowWeight="1"
-
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-
-    <Button
-        android:id="@+id/btn30"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-
-
-        android:layout_columnWeight="1"
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn31"
-        android:layout_columnWeight="1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-
-        android:text="01" />
-    <Button
-        android:id="@+id/btn32"
-
-        android:layout_columnWeight="1"
-
-        android:layout_rowWeight="1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:text="02" />
-
-    <Button
-        android:id="@+id/btn33"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_columnWeight="1"
-
-        android:layout_rowWeight="1"
-
-        android:text="03" />
-
-    <Button
-        android:id="@+id/btn34"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_rowWeight="1"
-
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-
-
-
-
-
-
-
-
-
-
-
-    <Button
-        android:id="@+id/btn40"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-
-
-        android:layout_columnWeight="1"
-        android:text="empty"/>
-
-    <Button
-        android:id="@+id/btn41"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn42"
-
-        android:layout_width="0dp"
-
-        android:layout_height="0dp"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn43"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_rowWeight="1"
-
-        android:layout_columnWeight="1"
-
-        android:text="Royal" />
-
-    <Button
-        android:id="@+id/btn44"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_columnWeight="1"
-
-        android:layout_rowWeight="1"
-
-        android:text="empty" />
-
-
-
-
-
-    <Button
-        android:id="@+id/btn54"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_columnWeight="1"
-
-        android:layout_rowWeight="1"
-
-        android:text="new game" />
-
-
-
-</GridLayout>
+        android:id="@+id/newGameBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="New Game"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
