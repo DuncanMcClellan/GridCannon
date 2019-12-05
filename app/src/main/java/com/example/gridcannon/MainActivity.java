@@ -218,31 +218,27 @@ public class MainActivity extends AppCompatActivity {
             else {
                 //nothing
             }
-
         }
-
     }
 
     //places card at selected position if all rules are met
     private void placeCard(int x, int y) {
         if (x == 9 && y == 9) {
             shameStack.push(deck.get(0));
-
             reset = true;
+            shameBtn.setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
         }
         else if (deck.get(0).isWild()) {
             resetStack(x, y);
             field[x][y].push(deck.get(0));
-
-            // TODO: Update Button Image
-            fieldBtns[x][y].setImageResource(deck.get(0).id);
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
 
             trigger(x, y);
         }
         else if (field[x][y].peek().getValue() <= deck.get(0).getValue()) {
             field[x][y].push(deck.get(0));
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
             deck.remove(0);
-            // TODO: Update Button Image
             trigger(x, y);
         }
         else {
@@ -258,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
 
             checkGameOver();
         }
-
     }
 
     private int[] dmg(int x, int y) {
@@ -408,6 +403,8 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
             selectRoyal(x, y);
+
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
         }
     }
 
@@ -468,6 +465,7 @@ public class MainActivity extends AppCompatActivity {
                     while(deck.get(0).isRoyal()){
                         royalStack.push(deck.get(0));
                         placeRoyals();
+
                     }
                 }
             }
