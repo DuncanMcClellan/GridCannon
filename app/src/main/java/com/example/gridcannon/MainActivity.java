@@ -235,8 +235,6 @@ public class MainActivity extends AppCompatActivity {
             field[x][y].push(deck.get(0));
 
             // TODO: Update Button Image
-
-            // gets the id of the card
             fieldBtns[x][y].setImageResource(deck.get(0).id);
 
             trigger(x, y);
@@ -707,8 +705,8 @@ public class MainActivity extends AppCompatActivity {
             deck.get(0).id = R.drawable.joker;
 
             // Ace of Spades
-            deck.get(2).card.setImageResource(R.drawable.aceSpades);
-            deck.get(2).id = R.drawable.aceSpades;
+            deck.get(2).card.setImageResource(R.drawable.acespades);
+            deck.get(2).id = R.drawable.acespades;
 
             // Spade Numbers
             deck.get(3).card.setImageResource(R.drawable.spades2);
@@ -739,20 +737,20 @@ public class MainActivity extends AppCompatActivity {
             deck.get(11).id = R.drawable.spades10;
 
             // Spade Royals
-            deck.get(12).card.setImageResource(R.drawable.jackSpades);
-            deck.get(12).id = R.drawable.jackSpades;
+            deck.get(12).card.setImageResource(R.drawable.jackspades);
+            deck.get(12).id = R.drawable.jackspades;
 
-            deck.get(13).card.setImageResource(R.drawable.queenSpades);
-            deck.get(13).id = R.drawable.queenSpades;
+            deck.get(13).card.setImageResource(R.drawable.queenspades);
+            deck.get(13).id = R.drawable.queenspades;
 
-            deck.get(14).card.setImageResource(R.drawable.kingSpades);
-            deck.get(14).id = R.drawable.kingSpades;
+            deck.get(14).card.setImageResource(R.drawable.kingspades);
+            deck.get(14).id = R.drawable.kingspades;
 
             //=======================================================
 
             // Ace of Clubs
-            deck.get(15).card.setImageResource(R.drawable.aceClubs);
-            deck.get(15).id = R.drawable.aceClubs;
+            deck.get(15).card.setImageResource(R.drawable.aceclubs);
+            deck.get(15).id = R.drawable.aceclubs;
 
 
             // Clubs Numbers
@@ -784,21 +782,21 @@ public class MainActivity extends AppCompatActivity {
             deck.get(24).id = R.drawable.clubs10;
 
             // Clubs Royals
-            deck.get(25).card.setImageResource(R.drawable.jackClubs);
-            deck.get(25).id = R.drawable.jackClubs;
+            deck.get(25).card.setImageResource(R.drawable.jackclubs);
+            deck.get(25).id = R.drawable.jackclubs;
 
-            deck.get(26).card.setImageResource(R.drawable.queenClubs);
-            deck.get(26).id = R.drawable.queenClubs;
+            deck.get(26).card.setImageResource(R.drawable.queenclubs);
+            deck.get(26).id = R.drawable.queenclubs;
 
-            deck.get(27).card.setImageResource(R.drawable.kingClubs);
-            deck.get(27).id = R.drawable.kingClubs;
+            deck.get(27).card.setImageResource(R.drawable.kingclubs);
+            deck.get(27).id = R.drawable.kingclubs;
 
 
             //=======================================================
 
             // Ace of Hearts
-            deck.get(28).card.setImageResource(R.drawable.aceHearts);
-            deck.get(28).id = R.drawable.aceHearts;
+            deck.get(28).card.setImageResource(R.drawable.acehearts);
+            deck.get(28).id = R.drawable.acehearts;
 
             // Hearts Numbers
             deck.get(29).card.setImageResource(R.drawable.hearts2);
@@ -829,21 +827,21 @@ public class MainActivity extends AppCompatActivity {
             deck.get(37).id = R.drawable.hearts10;
 
             // Hearts Royals
-            deck.get(38).card.setImageResource(R.drawable.jackHearts);
-            deck.get(38).id = R.drawable.jackHearts;
+            deck.get(38).card.setImageResource(R.drawable.jackhearts);
+            deck.get(38).id = R.drawable.jackhearts;
 
-            deck.get(39).card.setImageResource(R.drawable.queenHearts);
-            deck.get(39).id = R.drawable.queenHearts;
+            deck.get(39).card.setImageResource(R.drawable.queenhearts);
+            deck.get(39).id = R.drawable.queenhearts;
 
-            deck.get(40).card.setImageResource(R.drawable.kingHearts);
-            deck.get(40).id = R.drawable.kingHearts;
+            deck.get(40).card.setImageResource(R.drawable.kinghearts);
+            deck.get(40).id = R.drawable.kinghearts;
 
 
             //=======================================================
 
             // Ace of Diamonds
-            deck.get(41).card.setImageResource(R.drawable.aceDiamonds);
-            deck.get(41).id = R.drawable.aceDiamonds;
+            deck.get(41).card.setImageResource(R.drawable.acediamonds);
+            deck.get(41).id = R.drawable.acediamonds;
 
             // Diamonds Numbers
             deck.get(42).card.setImageResource(R.drawable.diamonds2);
@@ -874,14 +872,14 @@ public class MainActivity extends AppCompatActivity {
             deck.get(50).id = R.drawable.diamonds10;
 
             // Diamonds Royals
-            deck.get(51).card.setImageResource(R.drawable.jackDiamonds);
-            deck.get(51).id = R.drawable.jackDiamonds;
+            deck.get(51).card.setImageResource(R.drawable.jackdiamonds);
+            deck.get(51).id = R.drawable.jackdiamonds;
 
-            deck.get(52).card.setImageResource(R.drawable.queenDiamonds);
-            deck.get(52).id = R.drawable.queenDiamonds;
+            deck.get(52).card.setImageResource(R.drawable.queendiamonds);
+            deck.get(52).id = R.drawable.queendiamonds;
 
-            deck.get(53).card.setImageResource(R.drawable.kingDiamonds);
-            deck.get(53).id = R.drawable.kingDiamonds;
+            deck.get(53).card.setImageResource(R.drawable.kingdiamonds);
+            deck.get(53).id = R.drawable.kingdiamonds;
 
             // Throw exception?
         }
