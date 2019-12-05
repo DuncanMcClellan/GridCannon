@@ -466,7 +466,6 @@ public class MainActivity extends AppCompatActivity {
                     while(deck.get(0).isRoyal()){
                         royalStack.push(deck.get(0));
                         placeRoyals();
-
                     }
                 }
             }
