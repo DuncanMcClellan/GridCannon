@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,9 +17,12 @@ public class MainActivity extends AppCompatActivity {
     CardStack[][] field;
 
     // The buttons that represent the stacks of cards on the table
-    private Button[][] fieldBtns;
-    private Button shameBtn;
+    private ImageButton[][] fieldBtns;
+    private ImageButton deckBtn;
+    private ImageButton shameBtn;
     private Button newGameBtn;
+
+
 
     // The deck of cards
     private ArrayList<Card> deck = new ArrayList<Card>(54);
@@ -36,7 +41,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fieldBtns = new Button[5][5];
+        fieldBtns = new ImageButton[5][5];
+
+        // todo Duncan please review this to make sure im not messing it up
+
+        // Place-able Field Buttons
+        fieldBtns[1][1] = findViewById(R.id.field0);
+        fieldBtns[1][2] = findViewById(R.id.field1);
+        fieldBtns[1][3] = findViewById(R.id.field2);
+
+        fieldBtns[2][1] = findViewById(R.id.field3);
+        fieldBtns[2][2] = findViewById(R.id.field4);
+        fieldBtns[2][3] = findViewById(R.id.field5);
+
+        fieldBtns[3][1] = findViewById(R.id.field6);
+        fieldBtns[3][2] = findViewById(R.id.field7);
+        fieldBtns[3][3] = findViewById(R.id.field8);
+
+        // Royal Field Buttons
+        fieldBtns[0][1] = findViewById(R.id.royal0);
+        fieldBtns[0][2] = findViewById(R.id.royal1);
+        fieldBtns[0][3] = findViewById(R.id.royal2);
+
+        fieldBtns[1][0] = findViewById(R.id.royal3);
+        fieldBtns[1][4] = findViewById(R.id.royal4);
+
+        fieldBtns[2][0] = findViewById(R.id.royal5);
+        fieldBtns[2][4] = findViewById(R.id.royal6);
+
+        fieldBtns[3][0] = findViewById(R.id.royal7);
+        fieldBtns[3][4] = findViewById(R.id.royal8);
+
+        fieldBtns[4][1] = findViewById(R.id.royal9);
+        fieldBtns[4][2] = findViewById(R.id.royal10);
+        fieldBtns[4][3] = findViewById(R.id.royal11);
+
+        // Deck, Shame, and new Game Buttons
+        deckBtn = findViewById(R.id.deckBtn);
+        shameBtn = findViewById(R.id.shameBtn);
+        newGameBtn = findViewById(R.id.newGameBtn);
+
 
         // Initialize Field and Deck
         setOnClick();
@@ -58,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void trigger(int x, int y) {
 
-        int[] dmg = new int[2];
+        int[] dmg;
         dmg = dmg(x, y);
 
         if(dmg[0] > 0) {
@@ -183,13 +227,18 @@ public class MainActivity extends AppCompatActivity {
     private void placeCard(int x, int y) {
         if (x == 9 && y == 9) {
             shameStack.push(deck.get(0));
-            // TODO: Update Shamepile Button Image
+
             reset = true;
         }
         else if (deck.get(0).isWild()) {
             resetStack(x, y);
             field[x][y].push(deck.get(0));
+
             // TODO: Update Button Image
+
+            // gets the id of the card
+            fieldBtns[x][y].setImageResource(deck.get(0).id);
+
             trigger(x, y);
         }
         else if (field[x][y].peek().getValue() <= deck.get(0).getValue()) {
@@ -305,11 +354,11 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < 4; i++)
             for(int j = 0; j < 4; j++)
                 if(!(i == 2 && j == 2)){
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         deck.remove(0);
                     }
-                    field[i][j].push((Card) deck.get(0));
+                    field[i][j].push(deck.get(0));
                     deck.remove(0);
                 }
 
@@ -418,8 +467,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 1);
                 if(reset){
                     resetStack(1, 1);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -433,8 +482,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 2);
                 if(reset){
                     resetStack(1, 2);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -448,8 +497,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 3);
                 if(reset){
                     resetStack(1, 3);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -463,8 +512,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 1);
                 if(reset){
                     resetStack(1, 1);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -478,8 +527,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 2);
                 if(reset){
                     resetStack(1, 2);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -493,8 +542,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 3);
                 if(reset){
                     resetStack(1, 3);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -508,8 +557,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 1);
                 if(reset){
                     resetStack(1, 1);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -523,8 +572,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 2);
                 if(reset){
                     resetStack(1, 2);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -538,8 +587,8 @@ public class MainActivity extends AppCompatActivity {
                     placeCard(1, 3);
                 if(reset){
                     resetStack(1, 3);
-                    while(((Card) deck.get(0)).isRoyal()){
-                        royalStack.push((Card) deck.get(0));
+                    while(deck.get(0).isRoyal()){
+                        royalStack.push(deck.get(0));
                         placeRoyals();
                     }
                 }
@@ -589,23 +638,24 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < 54; i++) {
 
             // Jokers
-            if (i < 2)
+            if (i < 2)  // +2
                 deck.add(new Card(false, true, false, 0, 'J'));
 
                 // Ace of Spades
-            else if (i == 2)
+            else if (i == 2)  // + 1
                 deck.add(new Card(false, true, false, 1, 'S'));
+
 
                 // Spades Numbers
             else if (i < 12)//+10
                 deck.add(new Card(false, false, false, i - 1, 'S'));
 
-                // Spades Royals
+            // Spades Royals
             else if (i < 15)//+3
                 deck.add(new Card(true, false, false, i - 1, 'S'));
 
                 // Ace of Clubs
-            else if (i == 15)
+            else if (i == 15) // + 1
                 deck.add(new Card(false, true, false, 1, 'C'));
 
                 // Clubs Number
@@ -639,6 +689,199 @@ public class MainActivity extends AppCompatActivity {
                 // Diamonds Royals
             else if (i < 54)//+3
                 deck.add(new Card(true, false, false, i - 41, 'D'));
+
+            // Initializing card images
+
+            /** Note
+             *
+             * I hard coded this due to lack of time. This should not be in the final version.
+             * -EThan
+             * */
+
+
+            // Jokers
+            deck.get(0).card.setImageResource(R.drawable.joker);
+            deck.get(0).id = R.drawable.joker;
+
+            deck.get(1).card.setImageResource(R.drawable.joker);
+            deck.get(0).id = R.drawable.joker;
+
+            // Ace of Spades
+            deck.get(2).card.setImageResource(R.drawable.aceSpades);
+            deck.get(2).id = R.drawable.aceSpades;
+
+            // Spade Numbers
+            deck.get(3).card.setImageResource(R.drawable.spades2);
+            deck.get(3).id = R.drawable.spades2;
+
+            deck.get(4).card.setImageResource(R.drawable.spades3);
+            deck.get(4).id = R.drawable.spades3;
+
+            deck.get(5).card.setImageResource(R.drawable.spades4);
+            deck.get(5).id = R.drawable.spades4;
+
+            deck.get(6).card.setImageResource(R.drawable.spades5);
+            deck.get(6).id = R.drawable.spades5;
+
+            deck.get(7).card.setImageResource(R.drawable.spades6);
+            deck.get(7).id = R.drawable.spades6;
+
+            deck.get(8).card.setImageResource(R.drawable.spades7);
+            deck.get(8).id = R.drawable.spades7;
+
+            deck.get(9).card.setImageResource(R.drawable.spades8);
+            deck.get(9).id = R.drawable.spades8;
+
+            deck.get(10).card.setImageResource(R.drawable.spades9);
+            deck.get(10).id = R.drawable.spades9;
+
+            deck.get(11).card.setImageResource(R.drawable.spades10);
+            deck.get(11).id = R.drawable.spades10;
+
+            // Spade Royals
+            deck.get(12).card.setImageResource(R.drawable.jackSpades);
+            deck.get(12).id = R.drawable.jackSpades;
+
+            deck.get(13).card.setImageResource(R.drawable.queenSpades);
+            deck.get(13).id = R.drawable.queenSpades;
+
+            deck.get(14).card.setImageResource(R.drawable.kingSpades);
+            deck.get(14).id = R.drawable.kingSpades;
+
+            //=======================================================
+
+            // Ace of Clubs
+            deck.get(15).card.setImageResource(R.drawable.aceClubs);
+            deck.get(15).id = R.drawable.aceClubs;
+
+
+            // Clubs Numbers
+            deck.get(16).card.setImageResource(R.drawable.clubs2);
+            deck.get(16).id = R.drawable.clubs2;
+
+            deck.get(17).card.setImageResource(R.drawable.clubs3);
+            deck.get(17).id = R.drawable.clubs3;
+
+            deck.get(18).card.setImageResource(R.drawable.clubs4);
+            deck.get(18).id = R.drawable.clubs4;
+
+            deck.get(19).card.setImageResource(R.drawable.clubs5);
+            deck.get(19).id = R.drawable.clubs5;
+
+            deck.get(20).card.setImageResource(R.drawable.clubs6);
+            deck.get(20).id = R.drawable.clubs6;
+
+            deck.get(21).card.setImageResource(R.drawable.clubs7);
+            deck.get(21).id = R.drawable.clubs7;
+
+            deck.get(22).card.setImageResource(R.drawable.clubs8);
+            deck.get(22).id = R.drawable.clubs8;
+
+            deck.get(23).card.setImageResource(R.drawable.clubs9);
+            deck.get(23).id = R.drawable.clubs9;
+
+            deck.get(24).card.setImageResource(R.drawable.clubs10);
+            deck.get(24).id = R.drawable.clubs10;
+
+            // Clubs Royals
+            deck.get(25).card.setImageResource(R.drawable.jackClubs);
+            deck.get(25).id = R.drawable.jackClubs;
+
+            deck.get(26).card.setImageResource(R.drawable.queenClubs);
+            deck.get(26).id = R.drawable.queenClubs;
+
+            deck.get(27).card.setImageResource(R.drawable.kingClubs);
+            deck.get(27).id = R.drawable.kingClubs;
+
+
+            //=======================================================
+
+            // Ace of Hearts
+            deck.get(28).card.setImageResource(R.drawable.aceHearts);
+            deck.get(28).id = R.drawable.aceHearts;
+
+            // Hearts Numbers
+            deck.get(29).card.setImageResource(R.drawable.hearts2);
+            deck.get(29).id = R.drawable.hearts2;
+
+            deck.get(30).card.setImageResource(R.drawable.hearts3);
+            deck.get(30).id = R.drawable.hearts3;
+
+            deck.get(31).card.setImageResource(R.drawable.hearts4);
+            deck.get(31).id = R.drawable.hearts4;
+
+            deck.get(32).card.setImageResource(R.drawable.hearts5);
+            deck.get(32).id = R.drawable.hearts5;
+
+            deck.get(33).card.setImageResource(R.drawable.hearts6);
+            deck.get(33).id = R.drawable.hearts6;
+
+            deck.get(34).card.setImageResource(R.drawable.hearts7);
+            deck.get(34).id = R.drawable.hearts7;
+
+            deck.get(35).card.setImageResource(R.drawable.hearts8);
+            deck.get(35).id = R.drawable.hearts8;
+
+            deck.get(36).card.setImageResource(R.drawable.hearts9);
+            deck.get(36).id = R.drawable.hearts9;
+
+            deck.get(37).card.setImageResource(R.drawable.hearts10);
+            deck.get(37).id = R.drawable.hearts10;
+
+            // Hearts Royals
+            deck.get(38).card.setImageResource(R.drawable.jackHearts);
+            deck.get(38).id = R.drawable.jackHearts;
+
+            deck.get(39).card.setImageResource(R.drawable.queenHearts);
+            deck.get(39).id = R.drawable.queenHearts;
+
+            deck.get(40).card.setImageResource(R.drawable.kingHearts);
+            deck.get(40).id = R.drawable.kingHearts;
+
+
+            //=======================================================
+
+            // Ace of Diamonds
+            deck.get(41).card.setImageResource(R.drawable.aceDiamonds);
+            deck.get(41).id = R.drawable.aceDiamonds;
+
+            // Diamonds Numbers
+            deck.get(42).card.setImageResource(R.drawable.diamonds2);
+            deck.get(42).id = R.drawable.diamonds2;
+
+            deck.get(43).card.setImageResource(R.drawable.diamonds3);
+            deck.get(43).id = R.drawable.diamonds3;
+
+            deck.get(44).card.setImageResource(R.drawable.diamonds4);
+            deck.get(44).id = R.drawable.diamonds4;
+
+            deck.get(45).card.setImageResource(R.drawable.diamonds5);
+            deck.get(45).id = R.drawable.diamonds5;
+
+            deck.get(46).card.setImageResource(R.drawable.diamonds6);
+            deck.get(46).id = R.drawable.diamonds6;
+
+            deck.get(47).card.setImageResource(R.drawable.diamonds7);
+            deck.get(47).id = R.drawable.diamonds7;
+
+            deck.get(48).card.setImageResource(R.drawable.diamonds8);
+            deck.get(48).id = R.drawable.diamonds8;
+
+            deck.get(49).card.setImageResource(R.drawable.diamonds9);
+            deck.get(49).id = R.drawable.diamonds9;
+
+            deck.get(50).card.setImageResource(R.drawable.diamonds10);
+            deck.get(50).id = R.drawable.diamonds10;
+
+            // Diamonds Royals
+            deck.get(51).card.setImageResource(R.drawable.jackDiamonds);
+            deck.get(51).id = R.drawable.jackDiamonds;
+
+            deck.get(52).card.setImageResource(R.drawable.queenDiamonds);
+            deck.get(52).id = R.drawable.queenDiamonds;
+
+            deck.get(53).card.setImageResource(R.drawable.kingDiamonds);
+            deck.get(53).id = R.drawable.kingDiamonds;
 
             // Throw exception?
         }

@@ -1,5 +1,8 @@
 package com.example.gridcannon;
 
+import android.media.Image;
+import android.widget.ImageView;
+
 public class Card {
 
     private boolean royal;
@@ -9,6 +12,8 @@ public class Card {
     private int value;
     private int armor = 0;
     private char suit;
+    public ImageView card;
+    public int id;              // The id of the card
 
     /* Only Constructor that will be needed */
     public Card(boolean royal, boolean wild, boolean red, int value, char suit) {
@@ -18,6 +23,7 @@ public class Card {
         this.value = value;
         this.suit = suit;
     }
+
 
     public boolean isRoyal(){return this.royal;}
 
