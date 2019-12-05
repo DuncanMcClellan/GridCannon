@@ -240,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
             field[x][y].push(deck.get(0));
             fieldBtns[x][y].setImageResource(getResources().getIdentifier(field[x][y].peek().getImage(), "drawable", getPackageName()));
             deck.remove(0);
+            deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
             trigger(x, y);
         }
         else {
@@ -251,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
                 royalStack.push(deck.get(0));
             }
             deck.remove(0);
+            deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
             placeRoyals();
 
             checkGameOver();
@@ -351,9 +353,11 @@ public class MainActivity extends AppCompatActivity {
                     while(deck.get(0).isRoyal()){
                         royalStack.push(deck.get(0));
                         deck.remove(0);
+                        deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
                     }
                     field[i][j].push(deck.get(0));
                     deck.remove(0);
+                    deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
                 }
 
         placeRoyals();
