@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         shameBtn = findViewById(R.id.shameBtn);
         newGameBtn = findViewById(R.id.newGameBtn);
 
-
         // Initialize Field and Deck
         setOnClick();
         newGame();
@@ -235,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
             field[x][y].push(deck.get(0));
 
             // TODO: Update Button Image
-            fieldBtns[x][y].setImageResource(deck.get(0).id);
+            //fieldBtns[x][y].setImageResource(deck.get(0).id);
 
             trigger(x, y);
         }
@@ -690,13 +689,89 @@ public class MainActivity extends AppCompatActivity {
 
             // Initializing card images
 
-            /** Note
-             *
-             * I hard coded this due to lack of time. This should not be in the final version.
-             * -EThan
-             * */
+
+            // Jokers
+            deck.get(0).imageName = "joker";
+            deck.get(1).imageName = "joker";
+
+            // Ace of Spades
+            deck.get(2).imageName = "acespades";
+
+            // Spade Numbers
+            deck.get(3).imageName = "spades2";
+            deck.get(4).imageName = "spades3";
+            deck.get(5).imageName = "spades4";
+            deck.get(6).imageName = "spades5";
+            deck.get(7).imageName = "spades6";
+            deck.get(8).imageName = "spades7";
+            deck.get(9).imageName = "spades8";
+            deck.get(10).imageName = "spades9";
+            deck.get(11).imageName = "spades10";
+
+            // Spade Royals
+            deck.get(12).imageName = "jackspades";
+            deck.get(13).imageName = "queenspades";
+            deck.get(14).imageName = "kingspades";
+
+            // Ace of Clubs
+            deck.get(15).imageName = "aceclubs";
+
+            // Club Numbers
+            deck.get(16).imageName = "clubs2";
+            deck.get(17).imageName = "clubs3";
+            deck.get(18).imageName = "clubs4";
+            deck.get(19).imageName = "clubs5";
+            deck.get(20).imageName = "clubs6";
+            deck.get(21).imageName = "clubs7";
+            deck.get(22).imageName = "clubs8";
+            deck.get(23).imageName = "clubs9";
+            deck.get(24).imageName = "clubs10";
+
+            // Club Royals
+            deck.get(25).imageName = "jackclubs";
+            deck.get(26).imageName = "queenclubs";
+            deck.get(27).imageName = "kingclubs";
+
+            // Ace of Hearts
+            deck.get(28).imageName = "acehearts";
+
+            // Hearts Numbers
+            deck.get(29).imageName = "hearts2";
+            deck.get(30).imageName = "hearts3";
+            deck.get(31).imageName = "hearts4";
+            deck.get(32).imageName = "hearts5";
+            deck.get(33).imageName = "hearts6";
+            deck.get(34).imageName = "hearts7";
+            deck.get(35).imageName = "hearts8";
+            deck.get(36).imageName = "hearts9";
+            deck.get(37).imageName = "hearts10";
+
+            // Hearts Royals
+            deck.get(38).imageName = "jackhearts";
+            deck.get(39).imageName = "queenhearts";
+            deck.get(40).imageName = "kinghearts";
+
+            // Ace of Diamonds
+            deck.get(41).imageName = "acediamonds";
+
+            // Diamonds Numbers
+            deck.get(42).imageName = "diamonds2";
+            deck.get(43).imageName = "diamonds3";
+            deck.get(44).imageName = "diamonds4";
+            deck.get(45).imageName = "diamonds5";
+            deck.get(46).imageName = "diamonds6";
+            deck.get(47).imageName = "diamonds7";
+            deck.get(48).imageName = "diamonds8";
+            deck.get(49).imageName = "diamonds9";
+            deck.get(50).imageName = "diamonds10";
+
+            // Diamonds Royals
+            deck.get(51).imageName = "jackdiamonds";
+            deck.get(52).imageName = "queendiamonds";
+            deck.get(53).imageName = "kingdiamonds";
 
 
+            /*
             // Jokers
             deck.get(0).card.setImageResource(R.drawable.joker);
             deck.get(0).id = R.drawable.joker;
@@ -880,6 +955,8 @@ public class MainActivity extends AppCompatActivity {
 
             deck.get(53).card.setImageResource(R.drawable.kingdiamonds);
             deck.get(53).id = R.drawable.kingdiamonds;
+
+             */
 
             // Throw exception?
         }

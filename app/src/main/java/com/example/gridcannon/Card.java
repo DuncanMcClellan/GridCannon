@@ -12,8 +12,7 @@ public class Card {
     private int value;
     private int armor = 0;
     private char suit;
-    public ImageView card;
-    public int id;              // The id of the card
+    public String imageName;
 
     /* Only Constructor that will be needed */
     public Card(boolean royal, boolean wild, boolean red, int value, char suit) {
@@ -24,6 +23,9 @@ public class Card {
         this.suit = suit;
     }
 
+    public String getImageName() {
+        return this.imageName;
+    }
 
     public boolean isRoyal(){return this.royal;}
 
