@@ -19,7 +19,7 @@ public class CardStack {
     }
 
     public void push(Card card) {
-        stack[++size] = card;
+        stack[size++] = card;
     }
 
     public Card pop() {
@@ -32,6 +32,8 @@ public class CardStack {
     }
 
     public Card peek(){
+        if(size == 0)
+            return null;
         return stack[size-1];
     }
 }

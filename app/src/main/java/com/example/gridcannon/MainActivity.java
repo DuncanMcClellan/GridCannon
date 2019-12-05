@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardStack[][] field;
+    // todo Duncan please review this to make sure im not messing it up
+    Stack<Card>[][] field;
 
     // The buttons that represent the stacks of cards on the table
     private ImageButton[][] fieldBtns;
@@ -28,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Card> deck = new ArrayList<Card>(54);
 
     // The stacks of cards
-    private CardStack royalStack;
-    private CardStack shameStack;
+    private Stack<Card> royalStack;
+    private Stack<Card> shameStack;
 
     TextView status;
 
@@ -42,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fieldBtns = new ImageButton[5][5];
-
-        // todo Duncan please review this to make sure im not messing it up
-        field = new CardStack[5][5];
+        field = new Stack[5][5];
 
         // Place-able Field Buttons
         fieldBtns[1][1] = findViewById(R.id.field0);
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         deckBtn = findViewById(R.id.deckBtn);
         shameBtn = findViewById(R.id.shameBtn);
         newGameBtn = findViewById(R.id.newGameBtn);
+        status = findViewById(R.id.status);
 
         // Initialize Field and Deck
         setOnClick();
@@ -90,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
     //pops the stack at the selected pos onto the bottom of the deck until the stack is empty
     private void resetStack(int x, int y) {
 
-        CardStack temp = new CardStack();
-        while (field[x][y].size > 0) {
+        Stack<Card> temp = new Stack<Card>();
+        while (field[x][y].size() > 0) {
             temp.push(field[x][y].pop());
         }
 
-        while (temp.size > 0) {
+        while (temp.size() > 0) {
             deck.add(temp.pop());
         }
     }
@@ -110,20 +111,20 @@ public class MainActivity extends AppCompatActivity {
             if (x == 1) {
 
                 // King
-                if(field[x+3][y].peek() != null && field[x+3][y].peek().getValue() == 13) {
+                if(field[x+3][y].size() > 0 && field[x+3][y].peek().getValue() == 13) {
                     if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0] && field[x + 3][y].peek().getSuit() == field[x + 2][y].peek().getSuit() && field[x + 3][y].peek().getSuit() == field[x + 1][y].peek().getSuit() && field[x + 3][y].peek().getSuit() == field[x][y].peek().getSuit()) {
                         field[x + 3][y].peek().kill();
                     }
                 }
 
                 // Queen
-                else if(field[x+3][y].peek() != null && field[x+3][y].peek().getValue() == 12) {
+                else if(field[x+3][y].size() > 0 && field[x+3][y].peek().getValue() == 12) {
                     if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0] && field[x + 3][y].peek().isRed() == field[x + 2][y].peek().isRed() && field[x + 3][y].peek().isRed() == field[x + 1][y].peek().isRed() && field[x + 3][y].peek().isRed() == field[x][y].peek().isRed()) {
                         field[x + 3][y].peek().kill();
                     }
                 }
 
-                else if (field[x + 3][y].peek() != null && field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0]) {
+                else if (field[x + 3][y].size() > 0 && field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0]) {
                     field[x + 3][y].peek().kill();
                 }
 
@@ -135,20 +136,20 @@ public class MainActivity extends AppCompatActivity {
             else if (x == 3) {
 
                 // King
-                if (field[x - 3][y].peek() != null && field[x - 3][y].peek().getValue() == 13) {
+                if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() == 13) {
                     if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0] && field[x - 3][y].peek().getSuit() == field[x - 2][y].peek().getSuit() && field[x - 3][y].peek().getSuit() == field[x - 1][y].peek().getSuit() && field[x - 3][y].peek().getSuit() == field[x][y].peek().getSuit()) {
                         field[x - 3][y].peek().kill();
                     }
                 }
 
                 // Queen
-                else if (field[x - 3][y].peek() != null && field[x + 3][y].peek().getValue() == 12) {
+                else if (field[x - 3][y].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
                     if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0] && field[x - 3][y].peek().isRed() == field[x - 2][y].peek().isRed() && field[x - 3][y].peek().isRed() == field[x - 1][y].peek().isRed() && field[x - 3][y].peek().isRed() == field[x][y].peek().isRed()) {
                         field[x - 3][y].peek().kill();
                     }
                 }
 
-                else if (field[x - 3][y].peek() != null && field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0]) {
+                else if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0]) {
                     field[x - 3][y].peek().kill();
                 }
 
@@ -168,19 +169,19 @@ public class MainActivity extends AppCompatActivity {
             if (y == 1) {
 
                 // King
-                if (field[x][y + 3].peek() != null && field[x][y + 3].peek().getValue() == 13) {
+                if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() == 13) {
                     if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0] && field[x][y + 3].peek().getSuit() == field[x][y + 2].peek().getSuit() && field[x][y + 3].peek().getSuit() == field[x][y + 1].peek().getSuit() && field[x][y + 3].peek().getSuit() == field[x][y].peek().getSuit()) {
                         field[x][y + 3].peek().kill();
                     }
                 }
                 // Queen
-                else if (field[x][y + 3].peek() != null && field[x + 3][y].peek().getValue() == 12) {
+                else if (field[x][y + 3].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
                     if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0] && field[x][y + 3].peek().isRed() == field[x][y + 2].peek().isRed() && field[x][y + 3].peek().isRed() == field[x][y + 1].peek().isRed() && field[x][y + 3].peek().isRed() == field[x][y].peek().isRed()) {
                         field[x][y + 3].peek().kill();
                     }
                 }
 
-                else if (field[x][y + 3].peek() != null && field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0]) {
+                else if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0]) {
                     field[x][y + 3].peek().kill();
                 }
 
@@ -193,20 +194,20 @@ public class MainActivity extends AppCompatActivity {
             else if (y == 3) {
 
                 // King
-                if (field[x][y - 3].peek() != null && field[x][y - 3].peek().getValue() == 13) {
+                if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() == 13) {
                     if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().getSuit() == field[x][y - 2].peek().getSuit() && field[x][y - 3].peek().getSuit() == field[x][y - 1].peek().getSuit() && field[x][y - 3].peek().getSuit() == field[x][y].peek().getSuit()) {
                         field[x][y - 3].peek().kill();
                     }
                 }
 
                 // Queen
-                else if (field[x][y - 3].peek() != null && field[x - 3][y].peek().getValue() == 12) {
+                else if (field[x][y - 3].size() > 0 && field[x - 3][y].peek().getValue() == 12) {
                     if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().isRed() == field[x][y - 2].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y - 1].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y].peek().isRed()) {
                         field[x][y - 3].peek().kill();
                     }
                 }
 
-                else if (field[x][y - 3].peek() != null && field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0]) {
+                else if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0]) {
                     field[x][y - 3].peek().kill();
                 }
 
@@ -231,13 +232,13 @@ public class MainActivity extends AppCompatActivity {
         else if (deck.get(0).isWild()) {
             resetStack(x, y);
             field[x][y].push(deck.get(0));
-            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(field[x][y].peek().getImage(), "drawable", getPackageName()));
 
             trigger(x, y);
         }
         else if (field[x][y].peek().getValue() <= deck.get(0).getValue()) {
             field[x][y].push(deck.get(0));
-            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(field[x][y].peek().getImage(), "drawable", getPackageName()));
             deck.remove(0);
             trigger(x, y);
         }
@@ -316,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
-                if (field[i][j].peek() != null && field[i][j].peek().isDead())
+                if (field[i][j].size() > 0 && field[i][j].peek().isDead())
                     counter++;
 
         if(counter == 12)
@@ -344,8 +345,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deal(){
-        for(int i = 0; i < 4; i++)
-            for(int j = 0; j < 4; j++)
+        for(int i = 1; i < 4; i++)
+            for(int j = 1; j < 4; j++)
                 if(!(i == 2 && j == 2)){
                     while(deck.get(0).isRoyal()){
                         royalStack.push(deck.get(0));
@@ -359,16 +360,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void placeRoyals(){
-        while(royalStack.peek() != null){
+        while(royalStack.size() > 0){
             int x = 0, y = 0;
 
-            for(int i = 0; i < 4; i++)
-                for(int j = 0; j < 4; j++)
+            for(int i = 1; i < 4; i++)
+                for(int j = 1; j < 4; j++)
                     if(!(i == 2 && i == 2))
-                        if((field[i+1][j].peek() != null && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].peek() != null || field[i][j-1].peek() != null))) ||
-                                (field[i-1][j].peek() != null && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].peek() != null || field[i][j-1].peek() != null))) ||
-                                (field[i][j+1].peek() != null && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].peek() != null || field[i-1][j].peek() != null))) ||
-                                (field[i][j-1].peek() != null && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].peek() != null || field[i-1][j].peek() != null))))
+                        if((field[i+1][j].size() > 0 && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
+                                (field[i-1][j].size() > 0 && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
+                                (field[i][j+1].size() > 0 && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))) ||
+                                (field[i][j-1].size() > 0 && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))))
                             if(field[i][j].peek().getSuit() == royalStack.peek().getSuit())
                                 if(x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
                                     x = i;
@@ -379,10 +380,10 @@ public class MainActivity extends AppCompatActivity {
                     for(int j = 0; j < 4; j++)
                         if(!(i == 2 && j == 2))
                             //Check surrounding cards to see if there is an available royals slot
-                            if((field[i+1][j].peek() != null && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].peek() != null || field[i][j-1].peek() != null))) ||
-                                    (field[i-1][j].peek() != null && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].peek() != null || field[i][j-1].peek() != null))) ||
-                                    (field[i][j+1].peek() != null && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].peek() != null || field[i-1][j].peek() != null))) ||
-                                    (field[i][j-1].peek() != null && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].peek() != null || field[i-1][j].peek() != null))))
+                            if((field[i+1][j].size() > 0 && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
+                                    (field[i-1][j].size() > 0 && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
+                                    (field[i][j+1].size() > 0 && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))) ||
+                                    (field[i][j-1].size() > 0 && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))))
                                 if(field[i][j].peek().isRed() == royalStack.peek().isRed())
                                     if(x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
                                         x = i;
@@ -393,36 +394,36 @@ public class MainActivity extends AppCompatActivity {
                     for(int j = 0; j < 4; j++)
                         if(!(i == 2 && j == 2))
                             //Check surrounding cards to see if there is an available royals slot
-                            if((field[i+1][j].peek() != null && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].peek() != null || field[i][j-1].peek() != null))) ||
-                                    (field[i-1][j].peek() != null && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].peek() != null || field[i][j-1].peek() != null))) ||
-                                    (field[i][j+1].peek() != null && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].peek() != null || field[i-1][j].peek() != null))) ||
-                                    (field[i][j-1].peek() != null && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].peek() != null || field[i-1][j].peek() != null))))
+                            if((field[i+1][j].size() > 0 && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
+                                    (field[i-1][j].size() > 0 && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
+                                    (field[i][j+1].size() > 0 && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))) ||
+                                    (field[i][j-1].size() > 0 && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))))
                                 if(x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
                                     x = i;
                                     y = j;
                                 }
 
             selectRoyal(x, y);
-
-            fieldBtns[x][y].setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
+            if(!(x == 0 && (y == 0 || y == 5)) && !(x == 0 && (y == 0 || y == 5)))
+                fieldBtns[x][y].setImageResource(getResources().getIdentifier(field[x][y].peek().getImage(), "drawable", getPackageName()));
         }
     }
 
     private void selectRoyal(int x, int y){
         if(x == 1)
             if(y == 1)
-                if(field[x-1][y].peek() != null)
+                if(field[x-1][y].size() > 0)
                     y--;
-                else if(field[x][y-1].peek() != null)
+                else if(field[x][y-1].size() > 0)
                     x--;
                 else //both are null
                     x--; //user selection later
         if(y == 2)
             x--;
         if(y == 3)
-            if(field[x-1][y].peek() != null)
+            if(field[x-1][y].size() > 0)
                 y++;
-            else if(field[x][y+1].peek() != null)
+            else if(field[x][y+1].size() > 0)
                 x--;
             else //both are null
                 y++; //user selection later
@@ -433,18 +434,18 @@ public class MainActivity extends AppCompatActivity {
             y++;
         else if(x == 3)
             if(y == 1)
-                if(field[x+1][y].peek() != null)
+                if(field[x+1][y].size() > 0)
                     y--;
-                else if(field[x][y-1].peek() != null)
+                else if(field[x][y-1].size() > 0)
                     x++;
                 else //both are null
                     y--; //user selection later
         if(y == 2)
             x++;
         if(y == 3)
-            if(field[x+1][y].peek() != null)
+            if(field[x+1][y].size() > 0)
                 y++;
-            else if(field[x][y+1].peek() != null)
+            else if(field[x][y+1].size() > 0)
                 x++;
             else //both are null
                 x++; //user selection later
@@ -608,18 +609,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void newGame(){
-        init();
-        deal();
         status.setText("Playing");
         playing = true;
         reset = false;
-        royalStack = new CardStack(12);
-        shameStack = new CardStack(33);
+        royalStack = new Stack<Card>();
+        shameStack = new Stack<Card>();
 
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
                 if(!(i == 0 && (j == 0 || j == 5)) && !(i == 5 && (j == 0 || j == 5)))
-                    field[i][j] = new CardStack();
+                    field[i][j] = new Stack<Card>();
+
+        init();
+        deal();
+
         //shameBtn
     }
 
@@ -631,7 +634,7 @@ public class MainActivity extends AppCompatActivity {
                     continue;
 
                 else
-                    field[i][j] = new CardStack();
+                    field[i][j] = new Stack<Card>();
 
             }
         }
