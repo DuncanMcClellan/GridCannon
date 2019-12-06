@@ -638,10 +638,10 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
-                if (!(i == 0 && (j == 0 || j == 4)) && !(i == 4 && (j == 0 || j == 4))) {
+                if (!((i == 0 || i == 4) && (j == 0 || j == 4))) {
                     while (field[i][j].size() > 0)
                         field[i][j].pop();
-                    //fieldBtns[i][j].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                    fieldBtns[i][j].setImageResource(0);
                 }
 
         init();
@@ -711,9 +711,8 @@ public class MainActivity extends AppCompatActivity {
             else if (i < 54)//+3
                 deck.add(new Card(true, false, false, i - 41, 'D'));
         }
+
         // Initializing card images
-
-
         // Jokers
         deck.get(0).imageName = "joker";
         deck.get(1).imageName = "joker";
