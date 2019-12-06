@@ -262,9 +262,9 @@ public class MainActivity extends AppCompatActivity {
         if (!reset) {
             while(deck.get(0).isRoyal()) {
                 royalStack.push(deck.get(0));
+                deck.remove(0);
+                deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
             }
-            deck.remove(0);
-            deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
             placeRoyals();
 
             checkGameOver();
