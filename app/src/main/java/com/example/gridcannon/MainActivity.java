@@ -652,6 +652,18 @@ public class MainActivity extends AppCompatActivity {
         playing = true;
         reset = false;
 
+        deck.clear();
+
+        while(shameStack.size() > 0)
+            shameStack.pop();
+
+        for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 5; j++)
+                if(!(i == 0 && (j == 0 || j == 5)) && !(i == 5 && (j == 0 || j == 5)))
+                    while(field[i][j].size() > 0)
+                        field[i][j].pop();
+
+
         init();
         deal();
 
