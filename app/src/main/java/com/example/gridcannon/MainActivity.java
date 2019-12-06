@@ -387,45 +387,61 @@ public class MainActivity extends AppCompatActivity {
         while(royalStack.size() > 0){
             int x = 0, y = 0;
 
-            for(int i = 1; i < 4; i++)
-                for(int j = 1; j < 4; j++)
-                    if(!(i == 2 && j == 2))
-                        if((field[i+1][j].size() > 0 && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
-                                (field[i-1][j].size() > 0 && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
-                                (field[i][j+1].size() > 0 && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))) ||
-                                (field[i][j-1].size() > 0 && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))))
-                            if(field[i][j].peek().getSuit() == royalStack.peek().getSuit())
-                                if(x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
+            for(int i = 1; i < 4; i++) {
+                for (int j = 1; j < 4; j++) {
+                    if (!(i == 2 && j == 2)) {
+                        if ((field[i + 1][j].size() > 0 && !(field[i + 1][j].peek().isRoyal() && (field[i][j + 1].size() > 0 || field[i][j - 1].size() > 0))) ||
+                                (field[i - 1][j].size() > 0 && !(field[i - 1][j].peek().isRoyal() && (field[i][j + 1].size() > 0 || field[i][j - 1].size() > 0))) ||
+                                (field[i][j + 1].size() > 0 && !(field[i][j + 1].peek().isRoyal() && (field[i + 1][j].size() > 0 || field[i - 1][j].size() > 0))) ||
+                                (field[i][j - 1].size() > 0 && !(field[i][j - 1].peek().isRoyal() && (field[i + 1][j].size() > 0 || field[i - 1][j].size() > 0)))) {
+                            if (field[i][j].peek().getSuit() == royalStack.peek().getSuit()) {
+                                if (x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
                                     x = i;
                                     y = j;
                                 }
-            if(x == 0)
-                for(int i = 0; i < 4; i++)
-                    for(int j = 0; j < 4; j++)
-                        if(!(i == 2 && j == 2))
+                            }
+                        }
+                    }
+                }
+            }
+            if(x == 0) {
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        if (!(i == 2 && j == 2)) {
                             //Check surrounding cards to see if there is an available royals slot
-                            if((field[i+1][j].size() > 0 && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
-                                    (field[i-1][j].size() > 0 && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
-                                    (field[i][j+1].size() > 0 && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))) ||
-                                    (field[i][j-1].size() > 0 && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))))
-                                if(field[i][j].peek().isRed() == royalStack.peek().isRed())
-                                    if(x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
+                            if ((field[i + 1][j].size() > 0 && !(field[i + 1][j].peek().isRoyal() && (field[i][j + 1].size() > 0 || field[i][j - 1].size() > 0))) ||
+                                    (field[i - 1][j].size() > 0 && !(field[i - 1][j].peek().isRoyal() && (field[i][j + 1].size() > 0 || field[i][j - 1].size() > 0))) ||
+                                    (field[i][j + 1].size() > 0 && !(field[i][j + 1].peek().isRoyal() && (field[i + 1][j].size() > 0 || field[i - 1][j].size() > 0))) ||
+                                    (field[i][j - 1].size() > 0 && !(field[i][j - 1].peek().isRoyal() && (field[i + 1][j].size() > 0 || field[i - 1][j].size() > 0)))) {
+                                if (field[i][j].peek().isRed() == royalStack.peek().isRed()) {
+                                    if (x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
                                         x = i;
                                         y = j;
                                     }
-            if(x == 0)
-                for(int i = 0; i < 4; i++)
-                    for(int j = 0; j < 4; j++)
-                        if(!(i == 2 && j == 2))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if(x == 0) {
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        if (!(i == 2 && j == 2)) {
                             //Check surrounding cards to see if there is an available royals slot
-                            if((field[i+1][j].size() > 0 && !(field[i+1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
-                                    (field[i-1][j].size() > 0 && !(field[i-1][j].peek().isRoyal() && (field[i][j+1].size() > 0 || field[i][j-1].size() > 0))) ||
-                                    (field[i][j+1].size() > 0 && !(field[i][j+1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))) ||
-                                    (field[i][j-1].size() > 0 && !(field[i][j-1].peek().isRoyal() && (field[i+1][j].size() > 0 || field[i-1][j].size() > 0))))
-                                if(x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
+                            if ((field[i + 1][j].size() > 0 && !(field[i + 1][j].peek().isRoyal() && (field[i][j + 1].size() > 0 || field[i][j - 1].size() > 0))) ||
+                                    (field[i - 1][j].size() > 0 && !(field[i - 1][j].peek().isRoyal() && (field[i][j + 1].size() > 0 || field[i][j - 1].size() > 0))) ||
+                                    (field[i][j + 1].size() > 0 && !(field[i][j + 1].peek().isRoyal() && (field[i + 1][j].size() > 0 || field[i - 1][j].size() > 0))) ||
+                                    (field[i][j - 1].size() > 0 && !(field[i][j - 1].peek().isRoyal() && (field[i + 1][j].size() > 0 || field[i - 1][j].size() > 0)))) {
+                                if (x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
                                     x = i;
                                     y = j;
                                 }
+                            }
+                        }
+                    }
+                }
+            }
 
             selectRoyal(x, y);
             if(!(x == 0 && (y == 0 || y == 5)) && !(x == 0 && (y == 0 || y == 5)))
