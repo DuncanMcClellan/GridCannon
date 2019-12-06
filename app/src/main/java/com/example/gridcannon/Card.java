@@ -1,8 +1,5 @@
 package com.example.gridcannon;
 
-import android.media.Image;
-import android.widget.ImageView;
-
 public class Card {
 
     private boolean royal;

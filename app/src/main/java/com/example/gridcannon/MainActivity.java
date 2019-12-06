@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     // Queen
-                    else if (field[x][y - 3].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
+                    else if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() == 12) {
                         if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().isRed() == field[x][y - 2].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y - 1].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y].peek().isRed()) {
                             field[x][y - 3].peek().kill();
                         }
@@ -408,8 +408,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
             selectRoyal(x, y);
-            if (!((x == 0 || x == 4) && (y == 0 || y == 4)))
-                fieldBtns[x][y].setImageResource(getResources().getIdentifier(field[x][y].peek().getImage(), "drawable", getPackageName()));
         }
     }
 
@@ -431,33 +429,43 @@ public class MainActivity extends AppCompatActivity {
                     x--;
                 else //both are null
                     y++; //user selection later
-            else if (x == 2)
-                if (y == 1) //[2][1]
+            else {
+                //error
+            }
+        else if (x == 2)
+            if (y == 1) //[2][1]
+                y--;
+            else if (y == 3) //[2][3]
+                y++;
+            else {
+                //error
+            }
+        else if (x == 3)
+            if (y == 1) //[3][1]
+                if (field[x + 1][y].size() > 0)
                     y--;
-                else if (y == 3) //[2][3]
+                else if (field[x][y - 1].size() > 0)
+                    x++;
+                else //both are null
+                    y--; //user selection later
+            else if (y == 2) //[3][2]
+                x++;
+            else if (y == 3) //[3][3]
+                if (field[x + 1][y].size() > 0)
                     y++;
-                else if (x == 3)
-                    if (y == 1) //[3][1]
-                        if (field[x + 1][y].size() > 0)
-                            y--;
-                        else if (field[x][y - 1].size() > 0)
-                            x++;
-                        else //both are null
-                            y--; //user selection later
-                    else if (y == 2) //[3][2]
-                        x++;
-                    else if (y == 3) //[3][3]
-                        if (field[x + 1][y].size() > 0)
-                            y++;
-                        else if (field[x][y + 1].size() > 0)
-                            x++;
-                        else //both are null
-                            x++; //user selection later
-                    else {
-                        //error
-                    }
+                else if (field[x][y + 1].size() > 0)
+                    x++;
+                else //both are null
+                    x++; //user selection later
+            else {
+                //error
+            }
+        else {
+            //error
+        }
 
         field[x][y].push(royalStack.pop()); //received [3][2]
+        fieldBtns[x][y].setImageResource(getResources().getIdentifier(field[x][y].peek().getImage(), "drawable", getPackageName()));
     }
 
     private void setOnClick() {
