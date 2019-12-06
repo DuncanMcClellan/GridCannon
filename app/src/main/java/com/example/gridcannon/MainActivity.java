@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         while (temp.size() > 0) {
             deck.add(temp.pop());
         }
+
+        reset = false;
     }
 
     private void trigger(int x, int y) {
@@ -119,52 +121,47 @@ public class MainActivity extends AppCompatActivity {
         if(dmg[0] > 0) {
 
             if (x == 1) {
-
-                // King
-                if(field[x+3][y].size() > 0 && field[x+3][y].peek().getValue() == 13) {
-                    if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0] && field[x + 3][y].peek().getSuit() == field[x + 2][y].peek().getSuit() && field[x + 3][y].peek().getSuit() == field[x + 1][y].peek().getSuit() && field[x + 3][y].peek().getSuit() == field[x][y].peek().getSuit()) {
-                        field[x + 3][y].peek().kill();
+                if(field[x+3][y].size() > 0) {
+                    // King
+                    if (field[x + 3][y].size() > 0 && field[x + 3][y].peek().getValue() == 13) {
+                        if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0] && field[x + 3][y].peek().getSuit() == field[x + 2][y].peek().getSuit() && field[x + 3][y].peek().getSuit() == field[x + 1][y].peek().getSuit() && field[x + 3][y].peek().getSuit() == field[x][y].peek().getSuit()) {
+                            field[x + 3][y].peek().kill();
+                        }
                     }
-                }
 
-                // Queen
-                else if(field[x+3][y].size() > 0 && field[x+3][y].peek().getValue() == 12) {
-                    if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0] && field[x + 3][y].peek().isRed() == field[x + 2][y].peek().isRed() && field[x + 3][y].peek().isRed() == field[x + 1][y].peek().isRed() && field[x + 3][y].peek().isRed() == field[x][y].peek().isRed()) {
+                    // Queen
+                    else if (field[x + 3][y].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
+                        if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0] && field[x + 3][y].peek().isRed() == field[x + 2][y].peek().isRed() && field[x + 3][y].peek().isRed() == field[x + 1][y].peek().isRed() && field[x + 3][y].peek().isRed() == field[x][y].peek().isRed()) {
+                            field[x + 3][y].peek().kill();
+                        }
+                    } else if (field[x + 3][y].size() > 0 && field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0]) {
                         field[x + 3][y].peek().kill();
+                    } else {
+
                     }
-                }
-
-                else if (field[x + 3][y].size() > 0 && field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0]) {
-                    field[x + 3][y].peek().kill();
-                }
-
-                else {
-
                 }
             }
 
             else if (x == 3) {
+                if(field[x-3][y].size() > 0) {
 
-                // King
-                if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() == 13) {
-                    if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0] && field[x - 3][y].peek().getSuit() == field[x - 2][y].peek().getSuit() && field[x - 3][y].peek().getSuit() == field[x - 1][y].peek().getSuit() && field[x - 3][y].peek().getSuit() == field[x][y].peek().getSuit()) {
-                        field[x - 3][y].peek().kill();
+                    // King
+                    if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() == 13) {
+                        if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0] && field[x - 3][y].peek().getSuit() == field[x - 2][y].peek().getSuit() && field[x - 3][y].peek().getSuit() == field[x - 1][y].peek().getSuit() && field[x - 3][y].peek().getSuit() == field[x][y].peek().getSuit()) {
+                            field[x - 3][y].peek().kill();
+                        }
                     }
-                }
 
-                // Queen
-                else if (field[x - 3][y].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
-                    if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0] && field[x - 3][y].peek().isRed() == field[x - 2][y].peek().isRed() && field[x - 3][y].peek().isRed() == field[x - 1][y].peek().isRed() && field[x - 3][y].peek().isRed() == field[x][y].peek().isRed()) {
+                    // Queen
+                    else if (field[x - 3][y].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
+                        if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0] && field[x - 3][y].peek().isRed() == field[x - 2][y].peek().isRed() && field[x - 3][y].peek().isRed() == field[x - 1][y].peek().isRed() && field[x - 3][y].peek().isRed() == field[x][y].peek().isRed()) {
+                            field[x - 3][y].peek().kill();
+                        }
+                    } else if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0]) {
                         field[x - 3][y].peek().kill();
+                    } else {
+                        // nothing
                     }
-                }
-
-                else if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0]) {
-                    field[x - 3][y].peek().kill();
-                }
-
-                else {
-                    // nothing
                 }
             }
 
@@ -175,54 +172,46 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (dmg[1] > 0) {
-
             if (y == 1) {
-
-                // King
-                if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() == 13) {
-                    if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0] && field[x][y + 3].peek().getSuit() == field[x][y + 2].peek().getSuit() && field[x][y + 3].peek().getSuit() == field[x][y + 1].peek().getSuit() && field[x][y + 3].peek().getSuit() == field[x][y].peek().getSuit()) {
+                if(field[x][y+3].size() > 0) {
+                    // King
+                    if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() == 13) {
+                        if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0] && field[x][y + 3].peek().getSuit() == field[x][y + 2].peek().getSuit() && field[x][y + 3].peek().getSuit() == field[x][y + 1].peek().getSuit() && field[x][y + 3].peek().getSuit() == field[x][y].peek().getSuit()) {
+                            field[x][y + 3].peek().kill();
+                        }
+                    }
+                    // Queen
+                    else if (field[x][y + 3].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
+                        if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0] && field[x][y + 3].peek().isRed() == field[x][y + 2].peek().isRed() && field[x][y + 3].peek().isRed() == field[x][y + 1].peek().isRed() && field[x][y + 3].peek().isRed() == field[x][y].peek().isRed()) {
+                            field[x][y + 3].peek().kill();
+                        }
+                    } else if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0]) {
                         field[x][y + 3].peek().kill();
+                    } else {
+                        //nothing. royal slot is null
                     }
                 }
-                // Queen
-                else if (field[x][y + 3].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
-                    if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0] && field[x][y + 3].peek().isRed() == field[x][y + 2].peek().isRed() && field[x][y + 3].peek().isRed() == field[x][y + 1].peek().isRed() && field[x][y + 3].peek().isRed() == field[x][y].peek().isRed()) {
-                        field[x][y + 3].peek().kill();
-                    }
-                }
-
-                else if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0]) {
-                    field[x][y + 3].peek().kill();
-                }
-
-                else {
-                    //nothing. royal slot is null
-                }
-
             }
 
             else if (y == 3) {
-
-                // King
-                if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() == 13) {
-                    if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().getSuit() == field[x][y - 2].peek().getSuit() && field[x][y - 3].peek().getSuit() == field[x][y - 1].peek().getSuit() && field[x][y - 3].peek().getSuit() == field[x][y].peek().getSuit()) {
-                        field[x][y - 3].peek().kill();
+                if(field[x][y-3].size() > 0) {
+                    // King
+                    if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() == 13) {
+                        if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().getSuit() == field[x][y - 2].peek().getSuit() && field[x][y - 3].peek().getSuit() == field[x][y - 1].peek().getSuit() && field[x][y - 3].peek().getSuit() == field[x][y].peek().getSuit()) {
+                            field[x][y - 3].peek().kill();
+                        }
                     }
-                }
 
-                // Queen
-                else if (field[x][y - 3].size() > 0 && field[x - 3][y].peek().getValue() == 12) {
-                    if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().isRed() == field[x][y - 2].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y - 1].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y].peek().isRed()) {
+                    // Queen
+                    else if (field[x][y - 3].size() > 0 && field[x - 3][y].peek().getValue() == 12) {
+                        if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().isRed() == field[x][y - 2].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y - 1].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y].peek().isRed()) {
+                            field[x][y - 3].peek().kill();
+                        }
+                    } else if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0]) {
                         field[x][y - 3].peek().kill();
+                    } else {
+                        //nothing. royal slot is null
                     }
-                }
-
-                else if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0]) {
-                    field[x][y - 3].peek().kill();
-                }
-
-                else {
-                    //nothing. royal slot is null
                 }
             }
 
@@ -240,6 +229,14 @@ public class MainActivity extends AppCompatActivity {
             deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
             reset = true;
             shameBtn.setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
+        }
+        else if (field[x][y].size() < 1){
+            field[x][y].push(deck.get(0));
+            deck.remove(0);
+            deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
+            fieldBtns[x][y].setImageResource(getResources().getIdentifier(field[x][y].peek().getImage(), "drawable", getPackageName()));
+
+            trigger(x, y);
         }
         else if (deck.get(0).isWild()) {
             resetStack(x, y);
@@ -287,17 +284,17 @@ public class MainActivity extends AppCompatActivity {
                 dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
             }
 
-        else if(x == 1) {
+        else if(x == 1 && field[2][2].size() > 0) {
                 dmg[0] = field[x + 1][y].peek().getValue() + field[x + 2][y].peek().getValue();     //right
                 dmg[1] = 0;
             }
 
-        else if(x == 2 && y == 1) {
+        else if(x == 2 && y == 1 && field[2][2].size() > 0) {
                 dmg[0] = 0;
                 dmg[1] = field[x][y + 1].peek().getValue() + field[x][y + 2].peek().getValue();     //down
             }
 
-        else if(x == 2 && y == 3) {
+        else if(x == 2 && y == 3 && field[2][2].size() > 0) {
                 dmg[0] = 0;
                 dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
             }
@@ -312,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
                 dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
             }
 
-        else if(x == 3) {
+        else if(x == 3 && field[2][2].size() > 0) {
                 dmg[0] = field[x - 1][y].peek().getValue() + field[x - 2][y].peek().getValue();     //left
                 dmg[1] = 0;
             }
@@ -334,8 +331,9 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
-                if (field[i][j].size() > 0 && field[i][j].peek().isDead())
-                    counter++;
+                if(!(i == 0 && (j == 0 || j == 4)) && !(i == 4 && (j == 0 || j == 4)))
+                    if (field[i][j].size() > 0 && field[i][j].peek().isDead())
+                        counter++;
 
         if(counter == 12)
             lockGame(true);
