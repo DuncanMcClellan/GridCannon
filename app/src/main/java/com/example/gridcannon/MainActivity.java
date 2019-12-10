@@ -113,27 +113,30 @@ public class MainActivity extends AppCompatActivity {
         int[] dmg;
         dmg = dmg(x, y);
 
-        if (dmg[0] > 0) {
+        if (dmg[1] > 0) {
 
             if (x == 1) {
                 if (field[x + 3][y].size() > 0) {
                     // King
-                    if (field[x + 3][y].size() > 0 && field[x + 3][y].peek().getValue() == 13) {
+                    if (field[x + 3][y].peek().getValue() == 13) {
                         if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0] && field[x + 3][y].peek().getSuit() == field[x + 2][y].peek().getSuit() && field[x + 3][y].peek().getSuit() == field[x + 1][y].peek().getSuit() && field[x + 3][y].peek().getSuit() == field[x][y].peek().getSuit()) {
                             field[x + 3][y].peek().kill();
-                            fieldBtns[x+3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                            fieldBtns[x + 3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                         }
                     }
 
                     // Queen
-                    else if (field[x + 3][y].size() > 0 && field[x + 3][y].peek().getValue() == 12) {
+                    else if (field[x + 3][y].peek().getValue() == 12) {
                         if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0] && field[x + 3][y].peek().isRed() == field[x + 2][y].peek().isRed() && field[x + 3][y].peek().isRed() == field[x + 1][y].peek().isRed() && field[x + 3][y].peek().isRed() == field[x][y].peek().isRed()) {
                             field[x + 3][y].peek().kill();
-                            fieldBtns[x+3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                            fieldBtns[x + 3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                         }
-                    } else if (field[x + 3][y].size() > 0 && field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0]) {
+                    }
+
+                    //Jack
+                    else if (field[x + 3][y].peek().getValue() + field[x + 3][y].peek().getArmor() <= dmg[0]) {
                         field[x + 3][y].peek().kill();
-                        fieldBtns[x+3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                        fieldBtns[x + 3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                     } else {
                         //nothing
                     }
@@ -142,22 +145,25 @@ public class MainActivity extends AppCompatActivity {
                 if (field[x - 3][y].size() > 0) {
 
                     // King
-                    if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() == 13) {
+                    if (field[x - 3][y].peek().getValue() == 13) {
                         if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0] && field[x - 3][y].peek().getSuit() == field[x - 2][y].peek().getSuit() && field[x - 3][y].peek().getSuit() == field[x - 1][y].peek().getSuit() && field[x - 3][y].peek().getSuit() == field[x][y].peek().getSuit()) {
                             field[x - 3][y].peek().kill();
-                            fieldBtns[x-3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                            fieldBtns[x - 3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                         }
                     }
 
                     // Queen
-                    else if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() == 12) {
+                    else if (field[x - 3][y].peek().getValue() == 12) {
                         if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0] && field[x - 3][y].peek().isRed() == field[x - 2][y].peek().isRed() && field[x - 3][y].peek().isRed() == field[x - 1][y].peek().isRed() && field[x - 3][y].peek().isRed() == field[x][y].peek().isRed()) {
                             field[x - 3][y].peek().kill();
-                            fieldBtns[x-3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                            fieldBtns[x - 3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                         }
-                    } else if (field[x - 3][y].size() > 0 && field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0]) {
+                    }
+
+                    //Jack
+                    else if (field[x - 3][y].peek().getValue() + field[x - 3][y].peek().getArmor() <= dmg[0]) {
                         field[x - 3][y].peek().kill();
-                        fieldBtns[x-3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                        fieldBtns[x - 3][y].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                     } else {
                         // nothing
                     }
@@ -168,25 +174,28 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if (dmg[1] > 0) {
+        if (dmg[0] > 0) {
             if (y == 1) {
                 if (field[x][y + 3].size() > 0) {
                     // King
-                    if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() == 13) {
+                    if (field[x][y + 3].peek().getValue() == 13) {
                         if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0] && field[x][y + 3].peek().getSuit() == field[x][y + 2].peek().getSuit() && field[x][y + 3].peek().getSuit() == field[x][y + 1].peek().getSuit() && field[x][y + 3].peek().getSuit() == field[x][y].peek().getSuit()) {
                             field[x][y + 3].peek().kill();
-                            fieldBtns[x][y+3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                            fieldBtns[x][y + 3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                         }
                     }
                     // Queen
-                    else if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() == 12) {
+                    else if (field[x][y + 3].peek().getValue() == 12) {
                         if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0] && field[x][y + 3].peek().isRed() == field[x][y + 2].peek().isRed() && field[x][y + 3].peek().isRed() == field[x][y + 1].peek().isRed() && field[x][y + 3].peek().isRed() == field[x][y].peek().isRed()) {
                             field[x][y + 3].peek().kill();
-                            fieldBtns[x][y+3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                            fieldBtns[x][y + 3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                         }
-                    } else if (field[x][y + 3].size() > 0 && field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0]) {
+                    }
+
+                    //Jack
+                    else if (field[x][y + 3].peek().getValue() + field[x][y + 3].peek().getArmor() <= dmg[0]) {
                         field[x][y + 3].peek().kill();
-                        fieldBtns[x][y+3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                        fieldBtns[x][y + 3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                     } else {
                         //nothing. royal slot is null
                     }
@@ -194,22 +203,25 @@ public class MainActivity extends AppCompatActivity {
             } else if (y == 3) {
                 if (field[x][y - 3].size() > 0) {
                     // King
-                    if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() == 13) {
+                    if (field[x][y - 3].peek().getValue() == 13) {
                         if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().getSuit() == field[x][y - 2].peek().getSuit() && field[x][y - 3].peek().getSuit() == field[x][y - 1].peek().getSuit() && field[x][y - 3].peek().getSuit() == field[x][y].peek().getSuit()) {
                             field[x][y - 3].peek().kill();
-                            fieldBtns[x][y-3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                            fieldBtns[x][y - 3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                         }
                     }
 
                     // Queen
-                    else if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() == 12) {
+                    else if (field[x][y - 3].peek().getValue() == 12) {
                         if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0] && field[x][y - 3].peek().isRed() == field[x][y - 2].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y - 1].peek().isRed() && field[x][y - 3].peek().isRed() == field[x][y].peek().isRed()) {
                             field[x][y - 3].peek().kill();
-                            fieldBtns[x][y-3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                            fieldBtns[x][y - 3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                         }
-                    } else if (field[x][y - 3].size() > 0 && field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0]) {
+                    }
+
+                    //Jack
+                    else if (field[x][y - 3].peek().getValue() + field[x][y - 3].peek().getArmor() <= dmg[0]) {
                         field[x][y - 3].peek().kill();
-                        fieldBtns[x][y-3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
+                        fieldBtns[x][y - 3].setImageResource(getResources().getIdentifier("back", "drawable", getPackageName()));
                     } else {
                         //nothing. royal slot is null
                     }
@@ -228,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
             reset = true;
             shameBtn.setImageResource(getResources().getIdentifier(shameStack.peek().getImage(), "drawable", getPackageName()));
-        } else if (field[x][y].size() < 1) {
+        } else if (field[x][y].size() == 0) {
             field[x][y].push(deck.get(0));
             deck.remove(0);
             deckBtn.setImageResource(getResources().getIdentifier(deck.get(0).getImage(), "drawable", getPackageName()));
@@ -270,25 +282,51 @@ public class MainActivity extends AppCompatActivity {
         int[] dmg = new int[2];     // opposing x, opposing y
 
         if (x == 1 && y == 1) {
-            dmg[0] = field[x + 1][y].peek().getValue() + field[x + 2][y].peek().getValue();     //right
-            dmg[1] = field[x][y + 1].peek().getValue() + field[x][y + 2].peek().getValue();     //down
+            if (field[x][y].size() > 0 && field[x + 1][y].size() > 0 && field[x + 2][y].size() > 0) {
+                dmg[0] = field[x + 1][y].peek().getValue() + field[x + 2][y].peek().getValue();     //right
+            }
+            if (field[x][y].size() > 0 && field[x][y + 1].size() > 0 && field[x][y + 2].size() > 0) {
+                dmg[1] = field[x][y + 1].peek().getValue() + field[x][y + 2].peek().getValue();     //down
+            }
         } else if (x == 1 && y == 3) {
-            dmg[0] = field[x + 1][y].peek().getValue() + field[x + 2][y].peek().getValue();     //right
-            dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
-        } else if (x == 1 && field[2][2].size() > 0) {
-            dmg[0] = field[x + 1][y].peek().getValue() + field[x + 2][y].peek().getValue();     //right
-        } else if (x == 2 && y == 1 && field[2][2].size() > 0) {
-            dmg[1] = field[x][y + 1].peek().getValue() + field[x][y + 2].peek().getValue();     //down
-        } else if (x == 2 && y == 3 && field[2][2].size() > 0) {
-            dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
+            if (field[x][y].size() > 0 && field[x + 1][y].size() > 0 && field[x + 2][y].size() > 0) {
+                dmg[0] = field[x + 1][y].peek().getValue() + field[x + 2][y].peek().getValue();     //right
+            }
+            if (field[x][y].size() > 0 && field[x][y - 1].size() > 0 && field[x][y - 1].size() > 0) {
+                dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
+            }
+        } else if (x == 1) {
+            if (field[x][y].size() > 0 && field[x + 1][y].size() > 0 && field[x + 2][y].size() > 0) {
+                dmg[0] = field[x + 1][y].peek().getValue() + field[x + 2][y].peek().getValue();     //right
+            }
+        } else if (x == 2 && y == 1) {
+            if (field[x][y].size() > 0 && field[x][y + 1].size() > 0 && field[x][y + 2].size() > 0) {
+                dmg[1] = field[x][y + 1].peek().getValue() + field[x][y + 2].peek().getValue();     //down
+            }
+        } else if (x == 2 && y == 3) {
+            if (field[x][y].size() > 0 && field[x][y - 1].size() > 0 && field[x][y - 2].size() > 0) {
+                dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
+            }
         } else if (x == 3 && y == 1) {
-            dmg[0] = field[x - 1][y].peek().getValue() + field[x - 2][y].peek().getValue();     //left
-            dmg[1] = field[x][y + 1].peek().getValue() + field[x][y + 2].peek().getValue();     //down
+            if (field[x][y].size() > 0 && field[x - 1][y].size() > 0 && field[x - 2][y].size() > 0) {
+                dmg[0] = field[x - 1][y].peek().getValue() + field[x - 2][y].peek().getValue();     //left
+            }
+            if (field[x][y].size() > 0 && field[x][y + 1].size() > 0 && field[x][y + 2].size() > 0) {
+                dmg[1] = field[x][y + 1].peek().getValue() + field[x][y + 2].peek().getValue();     //down
+            }
         } else if (x == 3 && y == 3) {
-            dmg[0] = field[x - 1][y].peek().getValue() + field[x - 2][y].peek().getValue();     //left
-            dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
-        } else if (x == 3 && field[2][2].size() > 0) {
-            dmg[0] = field[x - 1][y].peek().getValue() + field[x - 2][y].peek().getValue();     //left
+            if (field[x][y].size() > 0 && field[x - 1][y].size() > 0 && field[x - 2][y].size() > 0) {
+                dmg[0] = field[x - 1][y].peek().getValue() + field[x - 2][y].peek().getValue();     //left
+            }
+            if (field[x][y].size() > 0 && field[x][y - 1].size() > 0 && field[x][y - 2].size() > 0) {
+                dmg[1] = field[x][y - 1].peek().getValue() + field[x][y - 2].peek().getValue();     //up
+            }
+        } else if (x == 3) {
+            if (field[x][y].size() > 0 && field[x - 1][y].size() > 0 && field[x - 2][y].size() > 0) {
+                dmg[0] = field[x - 1][y].peek().getValue() + field[x - 2][y].peek().getValue();     //left
+            }
+        } else {
+
         }
 
         return dmg;
@@ -367,11 +405,11 @@ public class MainActivity extends AppCompatActivity {
                 for (int j = 1; j < 4; j++) {
                     if (!(i == 2 && j == 2)) {
                         //Check surrounding cards to see if there is an available royals slot
-                        if ((field[i+1][j].size() == 0 && i == 3) ||
-                                (field[i-1][j].size() == 0 && i == 1) ||
-                                (field[i][j+1].size() == 0 && j == 3) ||
-                                (field[i][j-1].size() == 0 && j == 1)){
-                            if (field[i][j].size() > 0 &&  field[i][j].peek().getSuit() == royalStack.peek().getSuit()) {
+                        if ((field[i + 1][j].size() == 0 && i == 3) ||
+                                (field[i - 1][j].size() == 0 && i == 1) ||
+                                (field[i][j + 1].size() == 0 && j == 3) ||
+                                (field[i][j - 1].size() == 0 && j == 1)) {
+                            if (field[i][j].size() > 0 && field[i][j].peek().getSuit() == royalStack.peek().getSuit()) {
                                 if (x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
                                     x = i;
                                     y = j;
@@ -386,10 +424,10 @@ public class MainActivity extends AppCompatActivity {
                     for (int j = 1; j < 4; j++) {
                         if (!(i == 2 && j == 2)) {
                             //Check surrounding cards to see if there is an available royals slot
-                            if ((field[i+1][j].size() == 0 && i == 3) ||
-                                    (field[i-1][j].size() == 0 && i == 1) ||
-                                    (field[i][j+1].size() == 0 && j == 3) ||
-                                    (field[i][j-1].size() == 0 && j == 1)){
+                            if ((field[i + 1][j].size() == 0 && i == 3) ||
+                                    (field[i - 1][j].size() == 0 && i == 1) ||
+                                    (field[i][j + 1].size() == 0 && j == 3) ||
+                                    (field[i][j - 1].size() == 0 && j == 1)) {
                                 if (field[i][j].size() > 0 && field[i][j].peek().isRed() == royalStack.peek().isRed()) {
                                     if (x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
                                         x = i;
@@ -406,13 +444,15 @@ public class MainActivity extends AppCompatActivity {
                     for (int j = 1; j < 4; j++) {
                         if (!(i == 2 && j == 2)) {
                             //Check surrounding cards to see if there is an available royals slot
-                            if ((field[i+1][j].size() == 0 && i == 3) ||
-                                    (field[i-1][j].size() == 0 && i == 1) ||
-                                    (field[i][j+1].size() == 0 && j == 3) ||
-                                    (field[i][j-1].size() == 0 && j == 1)){
-                                if (x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
-                                    x = i;
-                                    y = j;
+                            if ((field[i + 1][j].size() == 0 && i == 3) ||
+                                    (field[i - 1][j].size() == 0 && i == 1) ||
+                                    (field[i][j + 1].size() == 0 && j == 3) ||
+                                    (field[i][j - 1].size() == 0 && j == 1)) {
+                                if(field[i][j].size() > 0) {
+                                    if (x == 0 || field[i][j].peek().getValue() > field[x][y].peek().getValue()) {
+                                        x = i;
+                                        y = j;
+                                    }
                                 }
                             }
                         }
@@ -666,7 +706,6 @@ public class MainActivity extends AppCompatActivity {
             else if (i == 2)  // + 1
                 deck.add(new Card(false, true, false, 1, 'S'));
 
-
                 // Spades Numbers
             else if (i < 12)//+10
                 deck.add(new Card(false, false, false, i - 1, 'S'));
@@ -683,33 +722,33 @@ public class MainActivity extends AppCompatActivity {
             else if (i < 25)//+10
                 deck.add(new Card(false, false, false, i - 14, 'C'));
 
-                // CLubs Royals
+                // Clubs Royals
             else if (i < 28)//+3
                 deck.add(new Card(true, false, false, i - 14, 'C'));
 
                 // Ace of Hearts
             else if (i == 28)
-                deck.add(new Card(false, true, false, 1, 'H'));
+                deck.add(new Card(false, true, true, 1, 'H'));
 
                 // Hearts Numbers
             else if (i < 38)//+10
-                deck.add(new Card(false, false, false, i - 28, 'H'));
+                deck.add(new Card(false, false, true, i - 27, 'H'));
 
                 // Hearts Royals
             else if (i < 41)//+3
-                deck.add(new Card(true, false, false, i - 28, 'H'));
+                deck.add(new Card(true, false, true, i - 27, 'H'));
 
                 // Ace of Diamonds
             else if (i == 41)
-                deck.add(new Card(false, true, false, 1, 'D'));
+                deck.add(new Card(false, true, true, 1, 'D'));
 
                 // Diamonds Numbers
             else if (i < 51)//+10
-                deck.add(new Card(false, false, false, i - 41, 'D'));
+                deck.add(new Card(false, false, true, i - 40, 'D'));
 
                 // Diamonds Royals
             else if (i < 54)//+3
-                deck.add(new Card(true, false, false, i - 41, 'D'));
+                deck.add(new Card(true, false, true, i - 40, 'D'));
         }
 
         // Initializing card images
