@@ -9,42 +9,19 @@
 
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="361dp"
+        android:id="@+id/rules"
+        android:layout_width="match_parent"
         android:layout_height="635dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="48dp"
-        android:text="Start:\n
-•	Go through deck, only put down number cards and jokers and Aces\n
-•	Leave center empty\n
-•	Collect royals that come up during pulling cards to create grid for immediate placement\n
-
-Placing royals\n
-•	place royal next to card most like it (suit, color, and then value)(we need to develop rules to determine immediate card placement\n
-o	suits first, then color, and then value, if all cards of same suit are covered, go by point value \n
-
-        Playing the Game:\n
-
-•	after initial royal cards are placed, pull top card from deck \n
-•	card can only be placed on stack with less  or equal value than it\n
-•	if royal is picked up, place it on edge following the royal rules \n
-•	if you have a card you can’t place, you have 2 options:
-o	you put it in the ‘shame pile’ and you have to ‘reset’ a pile, by putting all of the cards in that pile at the bottom of the deck, that section of the grid is now empty, it is able to have a new card placed on it.\n
-o	You add it to a royal as hit points for the royal it is most like it(follow rules of value, if you have 2 royals of the same suit, give the armor to the one with the least hit points \n
-•	King can only be attacked by points of its same suits\n
-•	Queens can only be attacked by cards of the same color\n
-•	When you put a card on an edge, it triggers the cards on either side to attack the royal and check if it can kill it or not\n
-•	A joker or wild means a reset for one of your stacks, cards in stack goes on bottom
- 
-
-
-
-"
+        android:paddingRight="10dp"
+        android:paddingBottom="100dp"
         android:textColor="#000000"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbars="vertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,14 +10,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="506dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="56dp"
         android:text="Project Manager: \n
  •	Duncan McClellan \n\n
-UI Programmer: \n
+UI Programmers: \n
 •	Jay Futscher\n
 •	Duncan McClellan \n
 •	Ethan Gil \n\n
