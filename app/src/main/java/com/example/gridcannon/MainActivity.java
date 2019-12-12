@@ -2,6 +2,7 @@ package com.example.gridcannon;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton deckBtn;
     private ImageButton shameBtn;
     private Button newGameBtn;
+    private Button credits;
+    private Button rulesbtn;
 
 
     // The deck of cards
@@ -76,10 +79,29 @@ public class MainActivity extends AppCompatActivity {
         deckBtn = findViewById(R.id.deckBtn);
         shameBtn = findViewById(R.id.shameBtn);
         newGameBtn = findViewById(R.id.newGameBtn);
+        credits = findViewById(R.id.btncredits);
+        rulesbtn = findViewById(R.id.btnRULES);
         status = findViewById(R.id.status);
 
         royalStack = new Stack<>();
         shameStack = new Stack<>();
+
+        credits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PopActivity.class);
+                startActivity(i);
+
+            }
+        });
+        rulesbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PopAct2.class);
+                startActivity(i);
+
+            }
+        });
 
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
